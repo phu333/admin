@@ -1,0 +1,13 @@
+
+.table-row-light {
+    background-color: #ffffff;
+}
+.table-row-dark {
+    background-color: #d9d9d9;
+}
+.ant-menu:hover{
+    color:thistle;
+  }
+  .ant-checkbox {
+    zoom: 1.5;
+}
