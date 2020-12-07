@@ -60,21 +60,13 @@ class CompanyTable extends React.Component {
         })
     }
     render() {
-        if(this.state.openAddCom){
-            return (
-              <Router>
-                <Redirect push to={"/admin/company/addCompany"} />
-                <Route exact path="/admin/company/addCompany" component={CreateCompany} />
-              </Router>);
-          }
-          else if (this.state.openViewCom) {
-            return (
-                <Router>
-                    <Redirect push to={"/admin/company/1"} />
-                    <Route exact path="/admin/company/:id" component={UpdateCompanyProfile} />
-                </Router>
-            );
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/admin/companys" } />
+                <Route exact path="/admin/companys" component={CompanyTable} />
+            </Router>);
         } else {
+
             var information = this.props.myLoginReducer.map((login, index) => {
                 return (
                     <div style={{ height: "100vh" }}>

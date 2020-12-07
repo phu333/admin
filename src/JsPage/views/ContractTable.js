@@ -1,17 +1,13 @@
-import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag,Popover } from 'antd';
-import ContractSearch from './ContractSearch'
-import "./Column.css"
 import {
-    EyeOutlined, FileExcelOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
-} from "@ant-design/icons"
-import ChooseContractTemplate from './ChooseContractTemplate'
-import ViewContractPage from './ViewContractPage'
+    ContainerOutlined, EyeOutlined, FileAddOutlined, FileExcelOutlined,
+    FileProtectOutlined, FormOutlined, UploadOutlined
+} from "@ant-design/icons";
+import { Button, Popover, Space, Table, Tag } from 'antd';
+import 'antd/dist/antd.css';
 import React, { Component } from 'react';
-import { createContract, contractInformation } from './ContractAction'
-import { connect } from 'react-redux'
+import ContractSearch from './ContractSearch';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
 const { Column } = Table;
 
 
@@ -90,7 +86,12 @@ class ContractTable extends Component {
 </span>
             </div>
         );
-
+        if (this.state.finish) {
+            return ( <Router>
+                <Redirect push to={"/admin/users" } />
+                <Route exact path="/admin/users" component={ContractSearch} />
+              </Router>);
+        } else {
             return (
                 <div style={{ height: "100vh" }}>
                     <Space size="large">
@@ -170,5 +171,5 @@ class ContractTable extends Component {
 
     
 }
-    
+}
 export default ContractTable

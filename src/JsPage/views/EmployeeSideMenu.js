@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import CompanyTable from './CompanyTable'
-import UserTable from './UserTable'
+import ContractTable from './ContractTable'
 import Header from './Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
@@ -92,7 +92,7 @@ class EmployeeSideMenu extends React.Component {
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
 
                     <Menu.Item key="companys">danh sách công ty</Menu.Item>
-                    <Menu.Item key="users">danh sách người dùng</Menu.Item>
+                    <Menu.Item key="users">danh sách hợp đồng</Menu.Item>
 
 
 
@@ -138,7 +138,7 @@ class EmployeeSideMenu extends React.Component {
                 {this.state.showComponent === "users" ?
                   <Router>
                     <Redirect push to={"/admin/" + this.state.showComponent} />
-                    <Route exact path="/admin/users" component={UserTable} />
+                    <Route exact path="/admin/users/" component={ContractTable} />
                   </Router>
                   : null}
                 
