@@ -102,8 +102,8 @@ class EmployeeSideMenu extends React.Component {
                   {permission.includes('customerManagePermission') ?
                           <Menu.Item key="companys">danh sách công ty</Menu.Item>
                   : null}
-                  {permission.includes('customerManagePermission') ?
-                          <Menu.Item key="companys">danh sách công ty</Menu.Item>
+                  {permission.includes('contractManagePermision') ?
+                    <Menu.Item key="users">danh sách hợp đồng</Menu.Item>
                   : null}
 
 
