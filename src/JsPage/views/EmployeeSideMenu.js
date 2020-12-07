@@ -13,7 +13,6 @@ import Header from './Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import "../Column.css"
-
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
@@ -22,6 +21,14 @@ const IconFont = createFromIconfontCN({
 });
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
+const permission = [
+  'signPermission',
+  'contractManagePermision',
+  'customerManagePermission',
+  'contractTypeManagePermission',
+  'employeeManagePermission',
+  'signatureManagePermission',
+  'editCompanyInformationPermission',];
 class EmployeeSideMenu extends React.Component {
   constructor() {
     super();
@@ -53,6 +60,8 @@ class EmployeeSideMenu extends React.Component {
   //   </Router>);
   // }
   render() {
+
+
 
     if (this.props.myLoginReducer !== "logout") {
 
@@ -90,11 +99,12 @@ class EmployeeSideMenu extends React.Component {
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
-
-                    <Menu.Item key="companys">danh sách công ty</Menu.Item>
-                    <Menu.Item key="users">danh sách hợp đồng</Menu.Item>
-
-
+                  {permission.includes('customerManagePermission') ?
+                          <Menu.Item key="companys">danh sách công ty</Menu.Item>
+                  : null}
+                  {permission.includes('customerManagePermission') ?
+                          <Menu.Item key="companys">danh sách công ty</Menu.Item>
+                  : null}
 
 
 
@@ -106,7 +116,7 @@ class EmployeeSideMenu extends React.Component {
 
 
                     <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
-                    
+
                   </SubMenu>
                   {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
@@ -141,7 +151,7 @@ class EmployeeSideMenu extends React.Component {
                     <Route exact path="/admin/users/" component={ContractTable} />
                   </Router>
                   : null}
-                
+
 
 
 

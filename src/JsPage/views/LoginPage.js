@@ -44,29 +44,7 @@ const middleLayout = {
     },
 };
 
-const userList = [
-    {
-        username: "phu111",
-        password: "123",
 
-    },
-    {
-        username: "phu222",
-        password: "123",
-
-    },
-    {
-        username: "phu333",
-        password: "123",
-
-    },
-    {
-        username: "phu444",
-        password: "123",
-
-    },
-
-]
 const initialState = {
     role: "",
     othersPage: "",
@@ -95,14 +73,6 @@ class LoginPage extends React.Component {
         let loginInformation = {
             email: "triphan@gmail.com",
             password: "123Pa$$word!",
-            // signPermission: true,
-            // contractManagePermision: true,
-            // customerManagePermission: true,
-            // contractTypeManagePermission: true,
-            // employeeManagePermission: true,
-            // signatureManagePermission: true,
-            // editCompanyInformationPermission: true,
-            // loginCode:true,
         }
 
         axios({
@@ -120,13 +90,21 @@ class LoginPage extends React.Component {
                     username: "Tri",
                     email: "triphan@gmail.com",
                     password: "123Pa$$word!",
-                    signPermission: true,
-                    contractManagePermision: true,
-                    customerManagePermission: true,
-                    contractTypeManagePermission: true,
-                    employeeManagePermission: true,
-                    signatureManagePermission: true,
-                    editCompanyInformationPermission: true,
+                    // signPermission: true,
+                    // contractManagePermision: true,
+                    // customerManagePermission: true,
+                    // contractTypeManagePermission: true,
+                    // employeeManagePermission: true,
+                    // signatureManagePermission: true,
+                    // editCompanyInformationPermission: true,
+                    Permission: [
+                        "signPermission",
+                        "contractManagePermision",
+                        "customerManagePermission",
+                        "contractTypeManagePermission",
+                        "employeeManagePermission",
+                        "signatureManagePermission",
+                        "editCompanyInformationPermission",],
                     loginCode: true,
                 }
 
