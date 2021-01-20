@@ -1,47 +1,48 @@
-import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag, message } from 'antd';
-import ContractSearch from '../Search/ContractSearch'
-import "../Column.css"
 import axios from 'axios'
-import {
-    FolderViewOutlined, DownloadOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
-} from "@ant-design/icons"
-import ChooseContractTemplate from '../Add/ChooseContractTemplate'
+import { Table, Button, Tag, message, Space } from 'antd';
+import ContractSearch from '../Search/ContractSearch'
+import { FolderViewOutlined, UploadOutlined, DownloadOutlined, FileAddOutlined, ContainerOutlined } from "@ant-design/icons"
+import AddContractExtension from './AddContractExtension'
+import UpdateContractExtension from '../Update/UpdateContractExtension'
 import ViewContractPage from '../Update/ViewContractPage'
-import React, { Component } from 'react';
-import { createContract, contractInformation } from '../actions/ContractAction'
+import React from 'react';
+import { createcontractExtension, contractExtensionInformation } from '../actions/ContractExtension'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import FadeIn from 'react-fade-in'
+import "../Column.css"
 const { Column } = Table;
-
-const dataSource = []
 var hash = require('object-hash')
-
-class ContractTable extends Component {
+class ContractExtensionTable extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            showCreateContract: false,
-            showContract: false,
+            showCreateContractExtension: false,
+            showContractExtension: false,
             contract: {},
             contractsCreate: [],
             contractsReciceve: [],
             contractsTotal: [],
-            company:{},
-            loading:false,
+            ompany: {},
+            finish: false,
+            loading: false,
         };
-        this.onOpenCreateContract = this.onOpenCreateContract.bind(this);
-        this.viewContract = this.viewContract.bind(this);
+
+        this.onOpenCreateContractExtension = this.onOpenCreateContractExtension.bind(this);
+        this.viewContractExtension = this.viewContractExtension.bind(this);
         this.Donwload = this.Donwload.bind(this);
-
-
+        this.onFinish = this.onFinish.bind(this)
+    }
+    onFinish() {
+        this.setState({
+            finish: true
+        })
     }
     componentDidMount() {
+
         this.setState({
-            loading:true
+            loading: true
         })
         axios({
             url: '/api/v1/Company/info',
@@ -75,7 +76,7 @@ class ContractTable extends Component {
                     .then((data) => {
                         console.log(data)
                         this.setState({
-                            contractsReciceve: data.data.filter(values=>values.statusAsString !== "Draft")
+                            contractsReciceve: data.data.filter(values => values.statusAsString !== "Draft")
                         })
                         axios({
                             url: '/api/v1/Contract',
@@ -96,52 +97,52 @@ class ContractTable extends Component {
 
                                 })
                                 this.setState({
-                                    
-                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve].filter(values=>values.isMainContract === true)
+
+                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve].filter(values => values.isMainContract !== true)
                                 })
-                                
-                                for(let i = 0; i <this.state.contractsTotal.length; i++){
+
+                                for (let i = 0; i < this.state.contractsTotal.length; i++) {
                                     axios({
-                                        url: '/api/v1/Company/info/guest?id='+this.state.contractsTotal[i].companyId,
+                                        url: '/api/v1/Company/info/guest?id=' + this.state.contractsTotal[i].companyId,
                                         method: "PUT",
-                            
-                                       
+
+
                                     })
                                         .then((response) => {
-                            
+
                                             return response.data;
                                         })
                                         .then((data) => {
-                                           
+
                                             this.state.contractsTotal[i]['ASide'] = data.data.name
-                            
-                            
-                            
-                            
+
+
+
+
                                         })
                                         .catch(error => {
                                             console.log(error)
-                            
-                            
+
+
                                         });
                                 }
-                                
-                                setTimeout(function(){
+
+                                setTimeout(function () {
                                     this.setState({
-                                        loading:false,
-                                        contractsTotal:[...this.state.contractsTotal]
+                                        loading: false,
+                                        contractsTotal: [...this.state.contractsTotal]
                                     })
                                     this.props.onSubmit(this.state.contractsTotal)
-                                }.bind(this),5000)
-                                
+                                }.bind(this), 5000)
+
                             })
-                            
+
                             .catch(error => {
 
 
                             });
                     })
-                    
+
                     .catch(error => {
 
 
@@ -153,13 +154,19 @@ class ContractTable extends Component {
 
 
             });
-
-
-
-
+    }
+    onOpenCreateContractExtension() {
+        this.setState({
+            showCreateContractExtension: true
+        })
 
     }
-    Donwload(text){
+    viewContractExtension() {
+        this.setState({
+            showContractExtension: true
+        })
+    }
+    Donwload(text) {
         if (this.state.company.id !== undefined) {
             axios({
                 url: "https://localhost:44338/api/Signature/PostContract",
@@ -210,61 +217,57 @@ class ContractTable extends Component {
                     });
             } else {
                 window.open(text.fileUrl, "_blank")
-                
+
             }
         } else {
-           
+
         }
     }
-    onOpenCreateContract() {
-        this.setState({
-            showCreateContract: true
-        })
-    }
-    viewContract() {
 
-        this.setState({
-
-            showContract: true
-        })
-    }
     render() {
 
-        console.log(this.props.newContract)
-
-        if (this.state.showCreateContract) {
-            return ( <FadeIn>
+        if (this.state.showCreateContractExtension) {
+            return (<FadeIn>
                 <Router>
-                    <Redirect push to={"/admin/chooseTemplate"} />
-                    <Route exact path="/admin/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} role={this.props.role} />
+                    <Redirect push to={"/admin/viewContract/" + hash.sha1(this.props.contract.id) + "/createExtension"} />
+                    <Route exact path="/admin/viewContract/:id/createExtension" render={() => <AddContractExtension token={this.props.token} contractId={this.props.contractId} contract={this.props.contract} role={this.props.role} />
                     } /></Router></FadeIn>
 
+
             );
-        } else if (this.state.showContract) {
-            return ( <FadeIn>
+        } else if (this.state.showContractExtension) {
+            return (<FadeIn>
+
+                <Router>
+                    <Redirect push to={"/admin/viewContract/" + hash.sha1(this.props.contract.id) + "/updateExtension" + hash.sha1(this.state.contract.id)} />
+                    <Route exact path="/admin/viewContract/:id/updateExtension/:exId" render={() => <UpdateContractExtension ismycontract={this.props.ismycontract} token={this.props.token} contractId={this.props.contractId} contractEx={this.state.contract} contract={this.props.contract} role={this.props.role} />
+                    } /></Router></FadeIn>
+            );
+        } else if (this.state.finish) {
+            return (<FadeIn>
                 <Router>
                     <Redirect push to={"/admin/viewContract/" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/admin/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} token={this.props.token} role={this.props.role} />
+                    <Route exact path="/admin/viewContract/:id" render={() => <ViewContractPage contract={this.props.contract} token={this.props.token} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );
         }
         else {
              
-            return (
-                <FadeIn>
+            return (<FadeIn>
                 <div >
-                    <Space size="large">
-                        <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
+                    {this.props.ismycontract ? <Space size="large">
+                        <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
-                    </Space>
+                    </Space> : null}
+
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
-                    <Table  dataSource={this.props.newContract}
-                   
-                    loading={this.state.loading}
+                    <Table dataSource={this.props.newContract}
+                        
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="Stt"  key="index"
-                             render={(text, record, index) => index+1}
+                        <Column title="Stt" key="Index"
+
+                            render={(text, record, index) => index+1}
                         />
                         <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
@@ -273,7 +276,8 @@ class ContractTable extends Component {
 
                             )}
                         />
-                       <Column title="Bên A" dataIndex="ASide" key="ASide"
+
+                        <Column title="Bên A" dataIndex="ASide" key="ASide"
                             render={(text, record) => (
 
                                 <p>{text}</p>
@@ -285,14 +289,32 @@ class ContractTable extends Component {
                                 <p>{text.companyName}</p>
 
                             )} />
-                       
+                        {/* <Column title="Chủ hợp đồng" dataIndex="customer" key="customer"
+                            render={(text, record) => (
+
+                                <p>{text.CreatorcompanyName}</p>
+
+                            )} /> */}
+                        {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
+                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                            sortDirections={['descend', 'ascend']}
+                            render={(text, record) => (
+
+                                <p>{text}</p>
+
+                            )} /> */}
+                        {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
+                            render={(text, record) => (
+
+                                <p>{text}</p>
+
+                            )} /> */}
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
                             render={(text, record) => `${text} VNĐ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                         />
-                        <Column  title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
-                            align="center"
+                        <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
@@ -329,7 +351,7 @@ class ContractTable extends Component {
                                 <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         contract: text,
-                                        showContract: true
+                                        showContractExtension: true
                                     })
                                 } />
 
@@ -351,13 +373,14 @@ class ContractTable extends Component {
                             render={(text, record) => (
 
                                 <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                    () =>this.Donwload(text)
+                                    () => this.Donwload(text)
                                 } />
 
                             )}
-                        /> 
+                        />
 
                     </Table></div ></FadeIn>
+
             );
         }
 
@@ -365,8 +388,8 @@ class ContractTable extends Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        onSubmit: (token) => {
-            dispatch(createContract(token))
+        onSubmit: (contractExtension) => {
+            dispatch(createcontractExtension(contractExtension))
         }
     }
 }
@@ -374,11 +397,10 @@ var mapStateToProps = state => {
 
 
     return {
-        newContract: state.myContractReducer,
-        myLoginReducer: state.myLoginReducer
+        newContractExtension: state.myContractExtensionReducer
     }
 
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ContractTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ContractExtensionTable)

@@ -1,15 +1,14 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag,Button } from 'antd';
+import { Table, Space, Tag } from 'antd';
 import ViewUser from './ViewUser'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ContractSearch from './ContractSearch'
+import Header from './Header'
 import { createUser, userInformation } from '../actions/UserAction'
 import { connect } from 'react-redux'
-import { EyeOutlined, FileOutlined, DeleteOutlined, UserOutlined, FileAddOutlined } from "@ant-design/icons"
-import LoginPage from './LoginPage'
+import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, EditOutlined } from "@ant-design/icons"
+import LoginPage from '../Login/LoginPage'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import CreateUser from './CreateUser'
 const { Column, ColumnGroup } = Table;
 
 
@@ -19,7 +18,7 @@ class UserList extends React.Component {
 
     this.state = {
       openViewUser: false,
-      openAddUser:false,
+
     };
 
 
@@ -60,32 +59,13 @@ class UserList extends React.Component {
     })
   }
   render() {
-    if(this.state.openAddUser){
-      return (
-        <Router>
-          <Redirect push to={"/admin/user/addUser"} />
-          <Route exact path="/admin/user/addUser" component={CreateUser} />
-        </Router>);
-    }
-    else if (this.state.openViewUser) {
-      return (
-        <Router>
-          <Redirect push to={"/admin/user/1"} />
-          <Route exact path="/admin/user/:id" component={ViewUser} />
-        </Router>);
+    if (this.state.openViewUser) {
+      return (<ViewUser />);
     } else {
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
-          <div style={{ height: "100vh" }}>
-            <Space size="large">
-              <Button type="primary" icon={<FileAddOutlined />} onClick={()=>{
-                this.setState({
-                  openAddUser :!this.state.openAddUser
-                })
-              }}>Tạo người dùng</Button>
-
-            </Space>
-            <ContractSearch />
+          <div style={{height: "100vh"}}>
+            <Header></Header>
             <Table dataSource={this.props.newUser}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
@@ -115,7 +95,7 @@ class UserList extends React.Component {
                 <b>{text}</b>
 
               )} />
-              <Column title="trạng thái" dataIndex="status" key="status"
+              <Column title="Trạng thái" dataIndex="status" key="status"
                 render={(text, record) => {
                   let color = 'pink'
                   if (text === 'deactive') {
@@ -128,7 +108,17 @@ class UserList extends React.Component {
                     color = 'pink'
                   } else if (text === 'rejected') {
                     color = 'grey'
-                  }
+                  } else if (text === 'Hiệu lực') {
+                    color = 'green'
+                } else if (text === 'Vô hiệu hóa') {
+                    color = 'red'
+                } else if (text === 'Chờ bên ta ký') {
+                    color = 'blue'
+                } else if (text === 'Chờ đối tác ký') {
+                    color = 'blue'
+                } else if (text === 'Hoàn thành') {
+                    color = 'yellow'
+                }
                   return (<Tag color={color} key={text}>
                     {text.toUpperCase()}
                   </Tag>);
@@ -136,11 +126,11 @@ class UserList extends React.Component {
               />
 
               <Column
-                title="Xem chi tiết"
+                title="Chi tiết"
                 key="action"
                 render={(text, record) => (
                   <Space size="middle">
-                    <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Sửa</EyeOutlined>
+                    <EditOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Sửa</EditOutlined>
                   </Space>
                 )}
               />

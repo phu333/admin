@@ -1,11 +1,18 @@
 import { combineReducers } from 'redux'
 import myLoginReducer from './logins'
-import myCompanyReducer from './companys'
-import myUserReducer from './users'
+import myContractReducer from'./contracts'
+import myContractExtensionReducer from './contractExtensions'
+import myCustomerReducer from'./customers'
+import myContractTypeReducer from './contractTypes'
+
+import myEmployeeReducer from './employees'
 const myReducers  = combineReducers({
     myLoginReducer,
-    myCompanyReducer,
-    myUserReducer
+    myContractReducer,
+    myContractExtensionReducer,
+    myCustomerReducer,
+    myContractTypeReducer,
     
+    myEmployeeReducer,
 });
 export default myReducers;

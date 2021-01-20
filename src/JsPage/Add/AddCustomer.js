@@ -7,7 +7,7 @@ import {
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Row, Space, Card, message,Col,Popover } from 'antd';
-import CustomerTable from '../Table/CustomerTable'
+import CustomerTable from '../views/CompanyTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { TextArea } = Input;
@@ -69,7 +69,7 @@ const ValidationAdd = (
     <p>8 số cuối của mã số ngân hàng trên thẻ của công ty khách</p>
 
 );
-class CreateCompany extends React.Component {
+class AddCustomer extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -406,4 +406,4 @@ var mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateCompany);
+export default connect(null, mapDispatchToProps)(AddCustomer)
