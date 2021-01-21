@@ -2,10 +2,11 @@ import React from 'react';
 // import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import {Grid} from 'antd'
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Switch, Space, Card, Select, Col, Row, Popover, message } from 'antd';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
 import { CloseOutlined, CheckOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 // import {
 //     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
@@ -28,7 +29,7 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 8,
         span: 10,
     },
 };
@@ -408,7 +409,7 @@ class AddEmployee extends React.Component {
                             <br />
                             <Row>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 Sign: !this.state.Sign
@@ -420,7 +421,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 GetContractList: !this.state.GetContractList
@@ -431,7 +432,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 ActiveDeactiveContract: !this.state.ActiveDeactiveContract
@@ -442,7 +443,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 UpdateContract: !this.state.UpdateContract
@@ -453,7 +454,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 CreateContract: !this.state.CreateContract
@@ -464,7 +465,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 GetAllCompanyTemplate: !this.state.GetAllCompanyTemplate
@@ -475,7 +476,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 ActiveDeactiveTemplate: !this.state.ActiveDeactiveTemplate
@@ -486,7 +487,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 UpdateTemplate: !this.state.UpdateTemplate
@@ -497,7 +498,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 CreateTemplate: !this.state.CreateTemplate
@@ -508,8 +509,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 UpdateCustomer: !this.state.UpdateCustomer
@@ -520,7 +520,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 {/* <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={()=>{
                                             this.setState({
                                                 GetCompanyAdminList:!this.state.GetCompanyAdminList
@@ -531,7 +531,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col> */}
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 ActiveDeactiveAccount: !this.state.ActiveDeactiveAccount
@@ -542,7 +542,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 GetCompanyAccountListByCompanyId: !this.state.GetCompanyAccountListByCompanyId
@@ -553,7 +553,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 UpdateAccountPermission: !this.state.UpdateAccountPermission
@@ -564,7 +564,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 CreateAccount: !this.state.CreateAccount
@@ -575,7 +575,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 ActiveDeactiveSignature: !this.state.ActiveDeactiveSignature
@@ -586,7 +586,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 UpdateSignature: !this.state.UpdateSignature
@@ -597,7 +597,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 CreateSignature: !this.state.CreateSignature
@@ -608,7 +608,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 {/* <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={()=>{
                                             this.setState({
                                                 GetAllCompanyList:!this.state.GetAllCompanyList
@@ -619,7 +619,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col> */}
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 GetAllCompanyAccount: !this.state.GetAllCompanyAccount
@@ -630,7 +630,7 @@ class AddEmployee extends React.Component {
                                     <p></p>
                                 </Col>
                                 <Col span={8}>
-                                    <Form.Item
+                                    <FormControlLabel
                                         control={<Switch onChange={() => {
                                             this.setState({
                                                 ActiveDeactiveCustomer: !this.state.ActiveDeactiveCustomer

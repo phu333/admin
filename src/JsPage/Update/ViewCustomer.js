@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { updateCustomer } from '../actions/CustomerAction';
 const layout = {
     labelCol: {
-        span: 4,
+        span: 8,
     },
     wrapperCol: {
         span: 10,
@@ -21,7 +21,7 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 10,
         span: 10,
     },
 };
@@ -204,7 +204,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item {...tailLayout}>
                         <Space size="large">
                             {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                Tạo
+                                Sửa
                             </Button> : null}
                             {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                 Reset
