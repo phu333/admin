@@ -140,17 +140,7 @@ class LoginPage extends React.Component {
                         email: data.data.email,
 
                         role: data.data.roles[0],
-                        signPermission: true,
-                        contractManagePermision: true,
-                        customerManagePermission: true,
-                        contractTypeManagePermission: true,
-                        employeeManagePermission: true,
-                        signatureManagePermission: true,
-                        editCompanyInformationPermission: true,
-                        ActiveDeactiveAccount:false,
-                        ActiveDeactiveTemplate:false,
-                        UpdateTemplate:false,
-                        UpdateAccountPermission:true,
+
                         isVerified: data.data.isVerified,
                         jwToken: data.data.jwToken,
                         loginCode: true,
@@ -170,6 +160,15 @@ class LoginPage extends React.Component {
                         .then((data) => {
                             console.log(data)
                             for(let i = 0; i < data.length; i++){
+                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
+                                {data[i].permissionName="GetAllCompanyAccount"}
+                                if(data[i].permissionName.includes("GetCompanyAdminList(ByRole)") )
+                                {data[i].permissionName="GetCompanyAdminListByR"}
+                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
+                                {data[i].permissionName="GetAllCompanyAccountByC"}
+                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
+                                {data[i].permissionName="GetAllCompanyAccountByC"}
+                                
                                 loginInfo[data[i].permissionName]=data[i].enabled
                             }
                             this.props.onSubmit(loginInfo)

@@ -8,7 +8,7 @@ import { Form, Input, Button, Row, Space, Card,Col,Popover } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
-import EmployeeTable from '../Table/EmployeeTable'
+import EmployeeTable from '../views/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
 

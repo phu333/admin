@@ -4,12 +4,14 @@ import { Menu, Layout } from 'antd';
 import { Breadcrumb, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
 import { Badge } from 'antd';
-import AddCompany from './AddCompany'
+import AddCompany from '../Add/AddCompany'
+import Employee from './EmployeeTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Chart from './ChartProfile'
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import ContractTable from './ContractTable'
+
 import CompanyTable from './CompanyTable'
+
 import UpdateProfile from '../Update/UpdateProfile'
 import UpdateProfileCompany from '../Update/UpdateProfileCompany'
 
@@ -103,11 +105,11 @@ class EmployeeSideMenu extends React.Component {
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
                     {login.companyId !== null ? <>
                       <Menu.Item active={true} key="Chart">Doanh thu</Menu.Item>
-                      {login.customerManagePermission === true ?
+                      {login.GetAllCompanyList === true ?
                         <Menu.Item key="Company">danh sách công ty</Menu.Item>
                         : null}
-                      {login.contractManagePermision === true ?
-                        <Menu.Item key="Contract">danh sách hợp đồng</Menu.Item>
+                      {login.GetAllCompanyAccount === true ?
+                        <Menu.Item key="Account">danh sách tài khoản</Menu.Item>
                         : null} </> :
                       <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}
 
@@ -120,7 +122,7 @@ class EmployeeSideMenu extends React.Component {
                   <SubMenu key="sub2" icon={<UserOutlined />} title="Thông tin cá nhân">
 
                     {login.companyId !== null ? <>
-                      {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
+                      {login.UpdateCompany === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
                     <Menu.Item key="profile" >Thông tin cá nhân</Menu.Item>
 
                   </SubMenu>
@@ -139,9 +141,8 @@ class EmployeeSideMenu extends React.Component {
                   <Breadcrumb.Item>{login.companyId !== null ?
                     <>{this.state.showComponent === "Company" ? "Danh sách khách hàng" : null}
                       {this.state.showComponent === "Chart" ? "Doanh thu" : null}
-                      {this.state.showComponent === "contractType" ? "Danh sách loại hợp đồng" : null}
-                      {this.state.showComponent === "Contract" ? "Danh sách hợp đồng" : null}
                       {this.state.showComponent === "profile" ? "Thông tin cá nhân" : null}
+                      {this.state.showComponent === "Account" ? "Thông tin tài khoản" : null}
                     </> : this.state.showComponent === "addCompany" ? "Tạo doanh nghiệp" : null}
 
                   </Breadcrumb.Item>
@@ -164,12 +165,6 @@ class EmployeeSideMenu extends React.Component {
                       </Router>
                       : null}
 
-                    {this.state.showComponent === "Contract" ?
-                      <Router>
-                        <Redirect push to={"/admin/" + this.state.showComponent} />
-                        <Route exact path="/admin/Contract/" render={() => <ContractTable token={login.jwToken} role={login.role} />} />
-                      </Router>
-                      : null}
                     {this.state.showComponent === "profile" ?
                       <Router>
                         <Redirect push to={"/admin/" + this.state.showComponent} />
@@ -187,7 +182,14 @@ class EmployeeSideMenu extends React.Component {
                         <Redirect push to={"/admin/" + this.state.showComponent} />
                         <Route exact path="/admin/Chart/" render={() => <Chart token={login.jwToken} role={login.role} />} />
                       </Router> : null}
-                  </> :
+                    {this.state.showComponent === "Account" ?
+                      <Router>
+                        <Redirect push to={"/admin/" + this.state.showComponent} />
+                        <Route exact path="/admin/Account/" render={() => <Employee token={login.jwToken} role={login.role} />} />
+                      </Router> : null}
+
+                  </>
+                    :
 
                     <Router>
                       <Redirect push to={"/capstone/addCompany"} />

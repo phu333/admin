@@ -1,21 +1,21 @@
 import React from "react";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
-import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form, Radio,Dropdown,Card } from 'antd';
+import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form, Radio,Card,Dropdown } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+import { createEmployee } from '../actions/EmployeeAction';
 import { connect } from 'react-redux';
-import { createContractType } from '../actions/ContractType';
 const { Option } = Select;
-class ContractTypeSearch extends React.Component {
+class EmployeeSearch extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            SearchValue: "",
             SearchBy: "all",
             firstSearchValue: "all",
             secondSearchValue: "all",
             thirdSearchValue: "all",
+            SearchValue: ""
         };
         this.handleChange = this.handleChange.bind(this);
 
@@ -27,17 +27,17 @@ class ContractTypeSearch extends React.Component {
     }
     onFinish = (values) => {
         console.log(this.state.SearchValue)
-        if (this.state.SearchBy === "SearchByContractType") {
-            let custometSearchList = this.props.templateList.filter(template => template.name.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
-            console.log(custometSearchList)
-            this.props.onSubmit(custometSearchList)
-        } else if (this.state.SearchBy === "SearchByCreater") {
-            let custometSearchList = this.props.templateList.filter(template => template.createdBy.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
-            console.log(custometSearchList)
-            this.props.onSubmit(custometSearchList)
+        if (this.state.SearchBy === "SearchByName") {
+            let EmployeeSearchList = this.props.employeeList.filter(employee => employee.firstName.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(EmployeeSearchList)
+            this.props.onSubmit(EmployeeSearchList)
+        } else if (this.state.SearchBy === "SearchByRoles") {
+            let EmployeeSearchList = this.props.employeeList.filter(employee => employee.roles.toString().toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(EmployeeSearchList)
+            this.props.onSubmit(EmployeeSearchList)
         } else {
             axios({
-                url: '/api/v1/ContractType',
+                url: '/api/Account/employee',
                 method: "GET",
                 headers: {
                     Authorization: 'Bearer ' + this.props.token,
@@ -58,18 +58,20 @@ class ContractTypeSearch extends React.Component {
                 .catch(error => {
 
                 });
-        }};
+        }
+
+    };
     onChange(value, dateString) {
         console.log('Selected Time: ', value);
         console.log('Formatted Selected Time: ', dateString);
     }
-
     onOk(value) {
         console.log('onOk: ', value);
     }
     onFinishFailed = (errorInfo) => {
 
     };
+
     onChangeFirstSearchValue = e => {
         this.setState({
             firstSearchValue: e.target.value
@@ -93,41 +95,20 @@ class ContractTypeSearch extends React.Component {
             <Space direction="horizontal">
                 <Card>
                     <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
-                        <Radio style={radioStyle} value={"SearchByContractType"}>
-                            tìm kiếm bằng loại hợp đồng
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchByCreater"}>
-                            tìm kiếm theo tên người tạo
-        </Radio>
-                        <Radio style={radioStyle} value={"all"}>
+                    <Radio style={radioStyle} value={"all"}>
                             tất cả
+        </Radio>
+        <Radio style={radioStyle} value={"SearchByName"}>
+                            tìm kiếm tên nhân viên
+        </Radio>
+                        <Radio style={radioStyle} value={"SearchByRoles"}>
+                            tìm kiếm theo chức vụ
         </Radio>
 
 
                     </Radio.Group>
                 </Card>
                 {/* <Card>
-                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-
-                        <Radio style={radioStyle} value={"1Month"}>
-                            1 tháng
-        </Radio>
-                        <Radio style={radioStyle} value={"1Quarter"}>
-                            1 quý
-        </Radio>
-                        <Radio style={radioStyle} value={"1Year"}>
-                            1 năm
-        </Radio>
-
-                        <Radio style={radioStyle} value={"SearchByCreateDate"}>
-                            tìm kiếm theo ngày tạo
-        </Radio>
-                    </Radio.Group>
-                </Card>
-                <Card>
                     <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -144,6 +125,7 @@ class ContractTypeSearch extends React.Component {
             </Space>
         )
         return (
+
             <div className="container">
 
 
@@ -151,6 +133,7 @@ class ContractTypeSearch extends React.Component {
                     className="site-page-header"
 
                     title={[<Space size="large">
+
 
 
                     </Space>]}
@@ -168,17 +151,16 @@ class ContractTypeSearch extends React.Component {
                                 <Dropdown overlay={dropDown} placement="bottomCenter" arrow>
                                     <Button icon={<MenuOutlined />}>Tìm kiếm bằng</Button>
                                 </Dropdown>
-
-                                {this.state.SearchBy === "SearchByContractType" ?
-                                     <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
-                                     </> : null}
-                                {this.state.SearchBy === "SearchByCreater" ?  <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
-                                    </> : null}
-                                {this.state.SearchBy === "SearchByCreateDate" ?
-                                    <> <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
+                                {this.state.SearchBy === "SearchByName" ?
+                                    <><Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                         </>
                                     : null}
-                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
+                                {this.state.SearchBy === "SearchByRoles" ? 
+                                <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
+                                    </> : null}
+
+                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
+
 
                             </Space>
                         </Form>
@@ -195,8 +177,8 @@ class ContractTypeSearch extends React.Component {
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (token) => {
-            dispatch(createContractType(token))
+            dispatch(createEmployee(token))
         }
     }
 }
-export default connect(null, mapDispatchToProps)(ContractTypeSearch);
+export default connect(null, mapDispatchToProps)(EmployeeSearch);
