@@ -264,7 +264,7 @@ class AddEmployee extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                    <h2 style={{ textAlign: 'center' }}>Tạo tài khoản</h2>
+                    <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
 
                     <Form
                         {...layout}
@@ -276,7 +276,7 @@ class AddEmployee extends React.Component {
 
                     >
                         <Form.Item
-                            label=" tên"
+                            label=" Tên"
                             name="firstName"
                             rules={[
 
@@ -427,7 +427,7 @@ class AddEmployee extends React.Component {
                                                 GetContractList: !this.state.GetContractList
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="quản lý danh sách hợp đồng"
+                                        label="Quản lý danh sách hợp đồng"
                                     />
                                     <p></p>
                                 </Col>
@@ -438,7 +438,7 @@ class AddEmployee extends React.Component {
                                                 ActiveDeactiveContract: !this.state.ActiveDeactiveContract
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="kích hoạt/vô hiệu hóa hợp đồng"
+                                        label="Kích hoạt/vô hiệu hóa hợp đồng"
                                     />
                                     <p></p>
                                 </Col>
@@ -493,7 +493,7 @@ class AddEmployee extends React.Component {
                                                 UpdateTemplate: !this.state.UpdateTemplate
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="chỉnh sửa mẫu hợp đồng"
+                                        label="Chỉnh sửa mẫu hợp đồng"
                                     />
                                     <p></p>
                                 </Col>
@@ -548,7 +548,7 @@ class AddEmployee extends React.Component {
                                                 GetCompanyAccountListByCompanyId: !this.state.GetCompanyAccountListByCompanyId
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="quản lý danh sách nhân viên"
+                                        label="Quản lý danh sách nhân viên"
                                     />
                                     <p></p>
                                 </Col>
@@ -559,7 +559,7 @@ class AddEmployee extends React.Component {
                                                 UpdateAccountPermission: !this.state.UpdateAccountPermission
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="chỉnh sửa quyền nhân viên"
+                                        label="Chỉnh sửa quyền nhân viên"
                                     />
                                     <p></p>
                                 </Col>
@@ -570,7 +570,7 @@ class AddEmployee extends React.Component {
                                                 CreateAccount: !this.state.CreateAccount
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="tạo tài khoản nhân viên"
+                                        label="Tạo tài khoản nhân viên"
                                     />
                                     <p></p>
                                 </Col>
@@ -592,7 +592,7 @@ class AddEmployee extends React.Component {
                                                 UpdateSignature: !this.state.UpdateSignature
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="chỉnh sửa thông tin chữ ký"
+                                        label="Chỉnh sửa thông tin chữ ký"
                                     />
                                     <p></p>
                                 </Col>
@@ -625,7 +625,7 @@ class AddEmployee extends React.Component {
                                                 GetAllCompanyAccount: !this.state.GetAllCompanyAccount
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                        label="quản lý danh sách nhân viên công ty"
+                                        label="Quản lý danh sách nhân viên công ty"
                                     />
                                     <p></p>
                                 </Col>
