@@ -264,7 +264,7 @@ class AddEmployee extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                    <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
+                    <h2 style={{ textAlign: 'center' }}>Tạo tài khoản</h2>
 
                     <Form
                         {...layout}
