@@ -106,7 +106,7 @@ class EmployeeList extends React.Component {
 
         return (<FadeIn>
           <div style={{ height: "100vh" }}>
-            {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
+            {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo tài khoản mới</Button> : null}
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >

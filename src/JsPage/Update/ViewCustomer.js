@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import axios from 'axios'
-import { Form, Input, Button, message, Card, Space } from 'antd';
+import { Form, Input, Button, message, Card, Space,Popover,Row,Col } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
+    QuestionCircleOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateCustomer } from '../actions/CustomerAction';
+import CustomerTable from '../views/CompanyTable'
+const { TextArea } = Input;
 const layout = {
     labelCol: {
         span: 8,
@@ -21,10 +23,48 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 10,
+        offset: 8,
         span: 10,
     },
 };
+const ValidationCompany = (
+
+    <p>Tên công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);const ValidationPresentor = (
+
+    <p>Người đại diện cho công ty khách</p>
+
+);const ValidationCertificate = (
+
+    <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của khách </p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng </p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong của người đại diện công ty khách</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại công ty khách trong khoảng 10 ký tự</p>
+
+);const ValidationBank = (
+
+    <p>8 số cuối của mã số ngân hàng trên thẻ của công ty khách</p>
+
+);
 
 class ViewCustomer extends React.Component {
     constructor() {
@@ -39,7 +79,7 @@ class ViewCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company/' + this.state.company.id,
+            url: '/api/v1/Customer/' + this.props.customer.id,
             method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
@@ -52,20 +92,17 @@ class ViewCustomer extends React.Component {
                 return response.data;
             })
             .then((data) => {
-
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
             })
+
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
-        this.setState({
-            isEdit: false
-        })
+
 
 
 
@@ -84,7 +121,11 @@ class ViewCustomer extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
-
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
+    }
     render() {
         console.log(this.props.customer)
         var ButtonFix = this.props.myLoginReducer.map((login, index) => {
@@ -97,98 +138,138 @@ class ViewCustomer extends React.Component {
                         : null
                 }</div>)
         })
-        return (
-            <Card>
-                <br />
-                <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                    Trở về
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/capstone/customerList"} />
+                <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
+                } />
+            </Router>);
+        }
+        else {
+            return (
+                <Card>
+                    <br />
+                    <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
               </Button>
-                <h2 style={{ textAlign: 'center' }}>Thông tin khách hàng</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thông tin khách hàng</h2>
 
-                <Form
-                    {...layout}
-                    name="basic"
-                    className="employee-form"
-
-                    onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
-
-                >
-
-                    <Form.Item
-                        label="Tên doanh nghiệp"
-                        name="name"
+                    <Form
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
+                        hideRequiredMark
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
 
                     >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.name} /> :
-                            <Input defaultValue={this.props.customer.name} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Mã số thuế"
-                        name="taxCode"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.taxCode} /> :
-                            <Input defaultValue={this.props.customer.taxCode} />}
-                    </Form.Item>
+                        <Form.Item
+                            label="Tên doanh nghiệp"
+                            name="name"
 
-                    <Form.Item
-                        label="Giấy phép kinh doanh"
-                        name="businessLicense"
+                        >
+                            {this.state.isEdit === false ?
+                                <Row gutter={8}> <Col span={20}><TextArea autoSize disabled defaultValue={this.props.customer.name} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row> :
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize defaultValue={this.props.customer.name} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Mã số thuế"
+                            name="taxCode"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.businessLicense} /> :
-                            <Input defaultValue={this.props.customer.businessLicense} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Điện thoại"
-                        name="phoneNumber"
+                        >
+                            {this.state.isEdit === false ?
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.taxCode} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row> :
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.taxCode} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
-                            <Input defaultValue={this.props.customer.phoneNumber} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Địa chỉ"
-                        name="address"
+                        <Form.Item
+                            label="Giấy phép kinh doanh"
+                            name="businessLicense"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.address} /> :
-                            <Input defaultValue={this.props.customer.address} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Email"
-                        name="email"
+                        >
+                            {this.state.isEdit === false ?
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.businessLicense} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.businessLicense} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Điện thoại"
+                            name="phoneNumber"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.email} /> :
-                            <Input defaultValue={this.props.customer.email} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Số tài khoản"
-                        name="bankAccount"
+                        >
+                            {this.state.isEdit === false ?
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.phoneNumber} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.phoneNumber} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.bankAccount} /> :
-                            <Input defaultValue={this.props.customer.bankAccount} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Người đại diện"
-                        name="role"
+                        >
+                            {this.state.isEdit === false ?
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.address} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row> :
+                              <Row gutter={8}> <Col span={20}> <Input defaultValue={this.props.customer.address} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                              <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                          </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="email"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue="Nguyen Van B" /> :
-                            <Input defaultValue="Nguyen Van B" />}
-                    </Form.Item>
-                    {/* <Form.Item
+                        >
+                            {this.state.isEdit === false ?
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.email} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.email} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Số tài khoản"
+                            name="bankAccount"
+
+                        >
+                            {this.state.isEdit === false ?
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.bankAccount} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.bankAccount} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
+                        </Form.Item>
+                        <Form.Item
+                            label="Người đại diện"
+                            name="role"
+
+                        >
+                            {this.state.isEdit === false ?
+                               <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van B" /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row> :
+                              <Row gutter={8}> <Col span={20}>  <Input defaultValue="Nguyen Van B" /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                              <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                          </Popover></Row>}
+                        </Form.Item>
+                        {/* <Form.Item
                         label="Chức vụ"
                         name="role"
                         
@@ -201,38 +282,38 @@ class ViewCustomer extends React.Component {
 
 
 
-                    <Form.Item {...tailLayout}>
-                        <Space size="large">
-                            {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                Sửa
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Sửa
                             </Button> : null}
-                            {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                Reset
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                    Reset
                             </Button> : null}
-                            {ButtonFix}
+                                {ButtonFix}
 
 
 
-                        </Space>
-                    </Form.Item>
-                    <Form.Item>
+                            </Space>
+                        </Form.Item>
+                        <Form.Item>
 
-                    </Form.Item>
-
-
-
-
-                </Form>
+                        </Form.Item>
 
 
 
 
-            </Card >
-        );
+                    </Form>
+
+
+
+
+                </Card >
+            );
+        }
+
     }
-
 }
-
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (token) => {
@@ -244,7 +325,7 @@ var mapStateToProps = state => {
 
     console.log(state.myLoginReducer)
     return {
-      myLoginReducer: state.myLoginReducer
+        myLoginReducer: state.myLoginReducer
     }
-  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCustomer);
