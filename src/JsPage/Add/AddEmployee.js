@@ -253,8 +253,8 @@ class AddEmployee extends React.Component {
         }
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/employee"} />
-                <Route exact path="/capstone/employee" render={() => <EmployeeTable token={this.props.token} role={this.props.role} />
+                <Redirect push to={"/admin/employee"} />
+                <Route exact path="/admin/employee" render={() => <EmployeeTable token={this.props.token} role={this.props.role} />
                 } /></Router>);
         } else {
 

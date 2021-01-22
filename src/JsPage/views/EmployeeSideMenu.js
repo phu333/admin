@@ -192,8 +192,8 @@ class EmployeeSideMenu extends React.Component {
                     :
 
                     <Router>
-                      <Redirect push to={"/capstone/addCompany"} />
-                      <Route exact path="/capstone/companyProfile" render={() => <AddCompany token={login.jwToken} role={login.role} />} /></Router>
+                      <Redirect push to={"/admin/addCompany"} />
+                      <Route exact path="/admin/companyProfile" render={() => <AddCompany token={login.jwToken} role={login.role} />} /></Router>
                   }
                 </Content>
 

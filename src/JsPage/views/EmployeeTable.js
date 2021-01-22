@@ -79,22 +79,22 @@ class EmployeeList extends React.Component {
     if (this.state.openEmployee === "openAddEmployee") {
       return (<FadeIn>
         <Router>
-          <Redirect push to={"/capstone/addEmployee"} />
-          <Route exact path="/capstone/addEmployee" render={() => <AddEmployee token={this.props.token} employee={this.state.employee} />} /></Router>
+          <Redirect push to={"/admin/addEmployee"} />
+          <Route exact path="/admin/addEmployee" render={() => <AddEmployee token={this.props.token} employee={this.state.employee} />} /></Router>
           </FadeIn>);
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (<FadeIn>
         <Router>
-          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.userName} />
-          <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
+          <Redirect push to={"/admin/updateEmployee/" + this.state.employee.userName} />
+          <Route exact path="/admin/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
 
         </Router></FadeIn>
       );
     } else if (this.state.openEmployee === "employeeDetail") {
       return (<FadeIn>
         <Router>
-          <Redirect push to={"/capstone/employeeDetail/" + this.state.employee.name} />
-          <Route exact path="/capstone/employeeDetail/:id" render={() => <EmployeeDetail token={this.props.token} employee={this.state.employee} />} />
+          <Redirect push to={"/admin/employeeDetail/" + this.state.employee.name} />
+          <Route exact path="/admin/employeeDetail/:id" render={() => <EmployeeDetail token={this.props.token} employee={this.state.employee} />} />
 
         </Router></FadeIn>
       );

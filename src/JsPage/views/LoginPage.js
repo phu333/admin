@@ -1,22 +1,20 @@
-import React, { Component, useCallback } from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import { PageHeader, Space, Row, Col } from 'antd';
-import { GoogleLogin } from 'react-google-login';
-import { Form, Input, Button, Checkbox, message } from 'antd';
-import EmployeeSideMenu from './EmployeeSideMenu';
-import FadeIn from 'react-fade-in'
-import axios from 'axios'
-
-import GoogleOutlined from '../logo/Google.png'
-
-import logo from '../logo/Capture.PNG'
-import AddUserAdmin from '../Add/AddUserAdmin'
-import ForgetPassword from './ForgetPassword'
 import { createFromIconfontCN } from '@ant-design/icons';
-import { connect } from 'react-redux'
-import { addLogin, login } from '../actions/loginAction'
+import { Button, Checkbox, Col, Form, Input, message, Row, Space } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
+import React from 'react';
+import FadeIn from 'react-fade-in';
+import { GoogleLogin } from 'react-google-login';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { addLogin } from '../actions/loginAction';
+import logo from '../logo/Capture.PNG';
+import GoogleOutlined from '../logo/Google.png';
+import AddUserAdmin from '../Add/AddUserAdmin';
+import EmployeeSideMenu from './EmployeeSideMenu';
+import ForgetPassword from './ForgetPassword';
+
+
 
 
 const IconFont = createFromIconfontCN({
@@ -27,7 +25,7 @@ const IconFont = createFromIconfontCN({
 });
 const layout = {
     labelCol: {
-        span: 6,
+        span: 8,
 
     },
     wrapperCol: {
@@ -36,40 +34,18 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
-        span: 10,
+        offset: 8,
+        span: 12,
     },
 };
 const middleLayout = {
     wrapperCol: {
-        offset: 6,
-        span: 10,
+        offset: 8,
+        span: 12,
     },
 };
 
-const userList = [
-    {
-        username: "phu111",
-        password: "123",
 
-    },
-    {
-        username: "phu222",
-        password: "123",
-
-    },
-    {
-        username: "phu333",
-        password: "123",
-
-    },
-    {
-        username: "phu444",
-        password: "123",
-
-    },
-
-]
 const initialState = {
     role: "",
     othersPage: "",
@@ -112,14 +88,7 @@ class LoginPage extends React.Component {
         let loginInformation = {
             email: values.username,
             password: "123Pa$$word!",
-            // signPermission: true,
-            // contractManagePermision: true,
-            // customerManagePermission: true,
-            // contractTypeManagePermission: true,
-            // employeeManagePermission: true,
-            // signatureManagePermission: true,
-            // editCompanyInformationPermission: true,
-            // loginCode:true,
+
         }
 
         axios({
@@ -140,7 +109,7 @@ class LoginPage extends React.Component {
                         email: data.data.email,
 
                         role: data.data.roles[0],
-
+                      
                         isVerified: data.data.isVerified,
                         jwToken: data.data.jwToken,
                         loginCode: true,
@@ -171,6 +140,9 @@ class LoginPage extends React.Component {
                                 
                                 loginInfo[data[i].permissionName]=data[i].enabled
                             }
+                            this.setState({
+                                othersPage: ""
+                            })
                             this.props.onSubmit(loginInfo)
                         })
                   
@@ -188,11 +160,7 @@ class LoginPage extends React.Component {
             })
             .catch(error => {
 
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
 
@@ -262,7 +230,7 @@ class LoginPage extends React.Component {
                                 onFinishFailed={this.onFinishFailed}
                             >
                                 {/* <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} /> */}
-                                <img src={logo} type="icon-javascript" style={{ height: '180px', width: '300px', color: '#08c', marginLeft: "25%" }} alt="Logo" />
+                                <img src={logo} type="icon-javascript" style={{ height: '180px', width: '300px', color: '#08c', marginLeft: "32%" }} alt="Logo" />
                                 <Form.Item
                                     label={<label style={{ color: "white" }}>Email người dùng</label>}
                                     name="username"

@@ -266,8 +266,8 @@ class ViewEmployee extends React.Component {
         })
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/employee"} />
-                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+                <Redirect push to={"/admin/employee"} />
+                <Route exact path="/admin/employee" component={EmployeeTable} /></Router>);
         } else {
             return (
 
