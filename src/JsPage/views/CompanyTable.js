@@ -34,9 +34,10 @@ class CustomerList extends React.Component {
     if (info == "0") { info = 1 }
     else { info = 0 }
     let Status = {
-        enabled: info
+      status: info
     }
     axios({
+      //      url: '/api/v1/Customer/'+index+'/change-status',ko chay duoc
         url: '/api/v1/Customer/'+index+'/change-status',
         data: Status,
         method: "PUT",
