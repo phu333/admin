@@ -183,7 +183,16 @@ class UpdateProfileCompany extends React.Component {
                                 <Form.Item
                                     label="Tên doanh nghiệp"
                                     name="name"
-    
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên doanh nghiệp',
+                                        },                            {
+                                        
+                                            message: 'Vui lòng nhập dưới 250 ký tự',
+                                            max: 250,
+                                        }
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
     
@@ -223,7 +232,7 @@ class UpdateProfileCompany extends React.Component {
                                         {
     
                                             message: 'Vui lòng nhập 10 ký tự',
-                                            min: 10,
+                                            min: 6,
                                             max: 10,
                                         },
                                     ]}
@@ -239,7 +248,17 @@ class UpdateProfileCompany extends React.Component {
                                 <Form.Item
                                     label="Địa chỉ"
                                     name="address"
-    
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập địa chỉ',
+                                            
+                                        },{
+            
+                                            message: 'Vui lòng nhập dưới 100 ký tự',
+                                            max: 100,
+                                        },
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.address} /></Col>    <Popover content={ValidationAdd} trigger="hover">
@@ -252,7 +271,16 @@ class UpdateProfileCompany extends React.Component {
                                 <Form.Item
                                     label="Email"
                                     name="email"
-    
+                                    rules={[
+                                        {
+                                            type: 'email',
+                                            message: 'The input is not valid E-mail!',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.email} /></Col>    <Popover content={ValidationEmail} trigger="hover">
@@ -265,7 +293,16 @@ class UpdateProfileCompany extends React.Component {
                                 <Form.Item
                                     label="Giấy phép kinh doanh"
                                     name="businessLicense"
-    
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập giấy phép',
+                                        },                                {
+                                            min: 10,
+                                            max: 10,
+                                            message: 'Vui lòng nhập 10 ký tự',
+                                        },
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input type="number" disabled defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
@@ -302,7 +339,16 @@ class UpdateProfileCompany extends React.Component {
                                 <Form.Item
                                     label="Người đại diện"
                                     name="representaive"
-    
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập người đại diện',
+                                            
+                                        },{
+            
+                                            message: 'Vui lòng nhập dưới 50 ký tự',
+                                            max: 50,
+                                        },]}   
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationPresentor} trigger="hover">

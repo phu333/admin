@@ -117,16 +117,11 @@ class ViewEmployee extends React.Component {
             })
             .then((data) => {
                 console.log(data.data)
-
+                message.success("quyền đã được cập nhật")
 
             })
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
 
@@ -162,29 +157,34 @@ class ViewEmployee extends React.Component {
         var permissionsT = this.state.currentPermission.map((permisssion) => {
             return (
                 <Col span={10}><div style={style}><strong>
-                {permisssion.permissionName==="UpdateCompany"?"Quyền Cập nhật thông tin công ty":null}
-                {permisssion.permissionName==="AddCustomer"?"Quyền thêm khách hàng":null}
-                {permisssion.permissionName==="Sign"?"Quyền ký":null}
-                {permisssion.permissionName==="GetContractList(ByCompanyId)"?"Quyền coi thông tin hợp đồng":null}
-                {permisssion.permissionName==="ActiveDeactiveContract"?"Quyền cập nhật trạng thái hợp đồng":null}
-                {permisssion.permissionName==="UpdateContract"?"Quyền cập nhật hợp đồng":null}
-                {permisssion.permissionName==="CreateContract"?"Quyền tạo hợp đồng":null}
-                {permisssion.permissionName==="GetAllCompanyTemplate(ByCompanyId)"?"Quyền lấy tất cả danh sách loại hợp đồng":null}
-                {permisssion.permissionName==="ActiveDeactiveTemplate"?"Quyền cập nhật trạng thái loại hợp đồng":null}
-                {permisssion.permissionName==="UpdateTemplate"?"Quyền cập nhật loại hợp đồng":null}
-                {permisssion.permissionName==="UpdateCustomer"?"Quyền Cập nhật thông tin khách":null}
-                {permisssion.permissionName==="CreateTemplate"?"Quyền tạo loại hợp đồng":null}
-                {permisssion.permissionName==="GetCompanyAdminList(ByRole)"?"Quyển coi thông tin admin":null}
-                {permisssion.permissionName==="ActiveDeactiveAccount"?"Quyền cập nhật trạng thái tài khoản":null}
-                {permisssion.permissionName==="GetCompanyAccountListByCompanyId"?"Quyền coi tài khoản công ty":null}
-                {permisssion.permissionName==="UpdateAccountPermission"?"Quyền cập nhật tài khoản công ty":null}
-                {permisssion.permissionName==="CreateAccount"?"Quyền tạo tài khoản của công ty":null}
-                {permisssion.permissionName==="ActiveDeactiveSignature"?"Quyền cập nhật trạng thái chữ ký":null}
-                {permisssion.permissionName==="UpdateSignature"?"Quyền cập nhật thông tin chữ ký":null}
-                {permisssion.permissionName==="CreateSignature"?"Quyền tạo chữ ký":null}
-                {permisssion.permissionName==="GetAllCompanyList"?"Quyền lấy tất cả thông tin công ty":null}
-                {permisssion.permissionName==="GetAllCompanyAccount(ByCompanyId)"?"Quyền lấy tất cả tài khoản công ty":null}
-                {permisssion.permissionName==="ActiveDeactiveCustomer"?"Quyền cập nhật trạng thái khách":null}
+                    {permisssion.permissionName==="UpdateCompany"?"Quyền Cập nhật thông tin công ty":null}
+                    {permisssion.permissionName==="AddCustomer"?"Quyền thêm khách hàng":null}
+                    {permisssion.permissionName==="Sign"?"Quyền ký":null}
+                    {permisssion.permissionName==="GetContractList(ByCompanyId)"?"Xem thông tin hợp đồng bằng Id công ty":null}
+                    {permisssion.permissionName==="GetContractList"?"Quyền coi thông tin hợp đồng":null}
+                    {permisssion.permissionName==="ActiveDeactiveContract"?"Quyền cập nhật trạng thái hợp đồng":null}
+                    {permisssion.permissionName==="UpdateContract"?"Quyền cập nhật hợp đồng":null}
+                    {permisssion.permissionName==="CreateContract"?"Quyền tạo hợp đồng":null}
+                    {permisssion.permissionName==="GetAllCompanyTemplate(ByCompanyId)"?"Xem loại hợp đồng đã lưu với Id công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyTemplate"?"Quyền lấy tất cả danh sách loại hợp đồng":null}
+                    {permisssion.permissionName==="ActiveDeactiveTemplate"?"Quyền cập nhật trạng thái loại hợp đồng":null}
+                    {permisssion.permissionName==="UpdateTemplate"?"Quyền cập nhật loại hợp đồng":null}
+                    {permisssion.permissionName==="UpdateCustomer"?"Quyền Cập nhật thông tin khách":null}
+                    {permisssion.permissionName==="CreateTemplate"?"Quyền tạo loại hợp đồng":null}
+                    {permisssion.permissionName==="GetCompanyAdminList(ByRole)"?"Xem thông tin admin bằng chức danh":null}
+                    {permisssion.permissionName==="GetCompanyAdminList"?"Quyển coi thông tin admin":null}
+                    {permisssion.permissionName==="ActiveDeactiveAccount"?"Quyền cập nhật trạng thái tài khoản":null}
+                    {permisssion.permissionName==="GetCompanyAccountListByCompanyId"?"Quyền coi tài khoản công ty":null}
+                    {permisssion.permissionName==="UpdateAccountPermission"?"Quyền cập nhật tài khoản công ty":null}
+                    {permisssion.permissionName==="CreateAccount"?"Quyền tạo tài khoản của công ty":null}
+                    {permisssion.permissionName==="ActiveDeactiveSignature"?"Quyền cập nhật trạng thái chữ ký":null}
+                    {permisssion.permissionName==="UpdateSignature"?"Quyền cập nhật thông tin chữ ký":null}
+                    {permisssion.permissionName==="CreateSignature"?"Quyền tạo chữ ký":null}
+                    {permisssion.permissionName==="GetAllCompanyList"?"Quyền lấy tất cả thông tin công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyAccount(ByCompanyId)"?" Quyền lấy tài khoản công ty bằng Id công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyAccount"?"Quyền lấy tất cả tài khoản công ty":null}
+                    {permisssion.permissionName==="ActiveDeactiveCustomer"?"Quyền cập nhật trạng thái khách":null}
+
                 </strong>:
                     {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
                         <div style={{ float: 'right' }}><Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked /></div>
@@ -218,16 +218,19 @@ class ViewEmployee extends React.Component {
                     {permisssion.permissionName==="UpdateCompany"?"Quyền Cập nhật thông tin công ty":null}
                     {permisssion.permissionName==="AddCustomer"?"Quyền thêm khách hàng":null}
                     {permisssion.permissionName==="Sign"?"Quyền ký":null}
-                    {permisssion.permissionName==="GetContractList(ByCompanyId)"?"Quyền coi thông tin hợp đồng":null}
+                    {permisssion.permissionName==="GetContractList(ByCompanyId)"?"Xem thông tin hợp đồng bằng Id công ty":null}
+                    {permisssion.permissionName==="GetContractList"?"Quyền coi thông tin hợp đồng":null}
                     {permisssion.permissionName==="ActiveDeactiveContract"?"Quyền cập nhật trạng thái hợp đồng":null}
                     {permisssion.permissionName==="UpdateContract"?"Quyền cập nhật hợp đồng":null}
                     {permisssion.permissionName==="CreateContract"?"Quyền tạo hợp đồng":null}
-                    {permisssion.permissionName==="GetAllCompanyTemplate(ByCompanyId)"?"Quyền lấy tất cả danh sách loại hợp đồng":null}
+                    {permisssion.permissionName==="GetAllCompanyTemplate(ByCompanyId)"?"Xem loại hợp đồng đã lưu với Id công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyTemplate"?"Quyền lấy tất cả danh sách loại hợp đồng":null}
                     {permisssion.permissionName==="ActiveDeactiveTemplate"?"Quyền cập nhật trạng thái loại hợp đồng":null}
                     {permisssion.permissionName==="UpdateTemplate"?"Quyền cập nhật loại hợp đồng":null}
                     {permisssion.permissionName==="UpdateCustomer"?"Quyền Cập nhật thông tin khách":null}
                     {permisssion.permissionName==="CreateTemplate"?"Quyền tạo loại hợp đồng":null}
-                    {permisssion.permissionName==="GetCompanyAdminList(ByRole)"?"Quyển coi thông tin admin":null}
+                    {permisssion.permissionName==="GetCompanyAdminList(ByRole)"?"Xem thông tin admin bằng chức danh":null}
+                    {permisssion.permissionName==="GetCompanyAdminList"?"Quyển coi thông tin admin":null}
                     {permisssion.permissionName==="ActiveDeactiveAccount"?"Quyền cập nhật trạng thái tài khoản":null}
                     {permisssion.permissionName==="GetCompanyAccountListByCompanyId"?"Quyền coi tài khoản công ty":null}
                     {permisssion.permissionName==="UpdateAccountPermission"?"Quyền cập nhật tài khoản công ty":null}
@@ -236,7 +239,8 @@ class ViewEmployee extends React.Component {
                     {permisssion.permissionName==="UpdateSignature"?"Quyền cập nhật thông tin chữ ký":null}
                     {permisssion.permissionName==="CreateSignature"?"Quyền tạo chữ ký":null}
                     {permisssion.permissionName==="GetAllCompanyList"?"Quyền lấy tất cả thông tin công ty":null}
-                    {permisssion.permissionName==="GetAllCompanyAccount(ByCompanyId)"?"Quyền lấy tất cả tài khoản công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyAccount(ByCompanyId)"?" Quyền lấy tài khoản công ty bằng Id công ty":null}
+                    {permisssion.permissionName==="GetAllCompanyAccount"?"Quyền lấy tất cả tài khoản công ty":null}
                     {permisssion.permissionName==="ActiveDeactiveCustomer"?"Quyền cập nhật trạng thái khách":null}
                     </strong>:
                     {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
@@ -257,8 +261,8 @@ class ViewEmployee extends React.Component {
         })
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/admin/employee"} />
-                <Route exact path="/admin/employee" component={EmployeeTable} /></Router>);
+                <Redirect push to={"/capstone/employee"} />
+                <Route exact path="/capstone/employee" render={() => <EmployeeTable  token={this.props.token} role={this.props.role} />} /></Router>);
         } else {
             return (
 

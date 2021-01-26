@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Tag, Button, Switch, message } from 'antd';
 import AddEmployee from '../Add/AddEmployee'
-import ViewEmployee from './ViewEmployee'
+import ViewEmployee from '../Update/ViewEmployee'
 import EmployeeDetail from '../Update/EmployeeDetail'
 import React from 'react';
 import "../Column.css"
@@ -109,7 +109,8 @@ class EmployeeList extends React.Component {
             {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo tài khoản mới</Button> : null}
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
-              rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+              // rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} 
+              >
         
               <Column title="Họ" dataIndex="lastName" key="lastName"
                 sorter={(a, b) => a.userName.localeCompare(b.lastName)}

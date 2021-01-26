@@ -80,14 +80,14 @@ class CreateCompany extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company?Name='+values.name,
+            url: '/api/v1/Company?Name=' + values.name,
             method: "GET",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            
-            
+
+
         })
             .then((response) => {
 
@@ -95,69 +95,66 @@ class CreateCompany extends React.Component {
             })
             .then((data) => {
 
-                for(let i = 0; i< data.data.length;i++){
-                    if(data.data[i]["name"] === values.name){
-                        values.id=data.data[i].id
+                for (let i = 0; i < data.data.length; i++) {
+                    if (data.data[i]["name"] === values.name) {
+                        values.id = data.data[i].id
                         axios({
                             url: '/api/v1/Customer',
                             method: "POST",
                             headers: {
                                 Authorization: 'Bearer ' + this.props.token,
-                
+
                             },
                             data: values
                         })
                             .then((response) => {
-                
+
                                 return response.data;
                             })
                             .then((data) => {
-                
-                                message.success("tao thanh cong")
+
+                                message.success("taọ thành công")
+
                                 this.setState({
                                     finish: true
                                 })
                             })
                             .catch(error => {
-                
-                                if (error.response.status === 500) {
-                                    message.error(error.response.status + ' Server under maintainence');
-                                } else if (error.response.status === 404) {
-                                    message.error(error.response.status + ' Server not found');
-                                }
-                
+
+                                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
                             });
                         return true;
-                    }else{
+                    } else {
                         axios({
                             url: '/api/v1/Customer',
                             method: "POST",
                             headers: {
                                 Authorization: 'Bearer ' + this.props.token,
-                
+
                             },
                             data: values
                         })
                             .then((response) => {
-                
+
                                 return response.data;
                             })
                             .then((data) => {
-                
+
                                 message.success("tao thanh cong")
                                 this.setState({
                                     finish: true
                                 })
-                
+
                             })
                             .catch(error => {
-                
+
                                 if (error.response.status === 500) {
                                     message.error(error.response.status + ' Server under maintainence');
                                 } else if (error.response.status === 404) {
                                     message.error(error.response.status + ' Server not found');
                                 }
-                
+
                             });
                         return false;
                     }
@@ -173,8 +170,8 @@ class CreateCompany extends React.Component {
                 }
 
             });
-        
-        
+
+
 
         // this.setState({
         //     finish: true
@@ -193,9 +190,9 @@ class CreateCompany extends React.Component {
     render() {
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/admin/customerList"} />
-                <Route exact path="/admin/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
-                    } />
+                <Redirect push to={"/capstone/customerList"} />
+                <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
+                } />
             </Router>);
         } else {
 
@@ -206,18 +203,18 @@ class CreateCompany extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                    <h2 style={{ textAlign: 'center' }}>Tạo khách hàng</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thêm thông tin khách hàng</h2>
 
                     <Form
                         {...layout}
                         name="basic"
                         className="employee-form"
-hideRequiredMark
+                        hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
                     >
-                        
+
                         <Form.Item
                             label="Tên doanh nghiệp"
                             name="name"
@@ -227,9 +224,9 @@ hideRequiredMark
                                     message: 'Vui lòng nhập tên doanh nghiệp',
                                 },
                             ]}>
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Mã số thuế"
@@ -237,18 +234,19 @@ hideRequiredMark
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập tên mst',
+                                    message: 'Vui lòng nhập mã số thuế',
                                 },
                                 {
-
+                                    min: 10,
+                                    max: 10,
                                     message: 'Vui lòng nhập 10 ký tự',
-                                   
                                 },
+
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
                         <Form.Item
@@ -258,12 +256,16 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập giấy phép',
+                                }, {
+                                    min: 10,
+                                    max: 10,
+                                    message: 'Vui lòng nhập 10 ký tự',
                                 },
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Điện thoại"
@@ -271,7 +273,7 @@ hideRequiredMark
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập sdt',
+                                    message: 'Vui lòng nhập số điện thoại',
                                 },
                                 {
 
@@ -281,9 +283,9 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                           <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -291,13 +293,18 @@ hideRequiredMark
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập Địa chỉ',
+                                    message: 'Vui lòng nhập địa chỉ',
+
+                                }, {
+
+                                    message: 'Vui lòng nhập dưới 100 ký tự',
+                                    max: 100,
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize  placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Email"
@@ -314,28 +321,23 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Số tài khoản"
                             name="bankAccount"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Số tài khoản',
-                                    
-                                },{
+                            rules={[{
 
-                                    message: 'Vui lòng nhập 10 ký tự',
-                                    min: 8,
-                                    max: 8,
-                                },
+                                message: 'Vui lòng nhập 8 ký tự',
+                                min: 8,
+                                max: 8,
+                            },
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type='number' placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Người đại diện"
@@ -344,12 +346,16 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Người đại diện',
-                                },
+                                },{
+
+                                    message: 'Vui lòng nhập dưới 50 ký tự',
+                                    max: 50,
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Chức vụ"
@@ -362,8 +368,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={ValidationRole} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
 
@@ -375,8 +381,7 @@ hideRequiredMark
                                     Tạo
                                 </Button>
                                 <Button type="primary" htmlType="reset" className="login-form-button">
-                                    Reset
-                                </Button>
+                                    Xóa dữ liệu đã nhập                                </Button>
 
 
                             </Space>

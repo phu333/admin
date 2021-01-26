@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Space, Card, message,Col,Popover } from 'antd';
+import { Form, Input, Button,Select, Row, Space, Card, message,Col,Popover } from 'antd';
 import CustomerTable from '../views/CompanyTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -258,6 +258,10 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập giấy phép',
+                                },{
+                                    min: 10,
+                                    max: 10,
+                                    message: 'Vui lòng nhập 10 ký tự',
                                 },
                             ]}
                         >
@@ -292,6 +296,10 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Địa chỉ',
+                                }, {
+
+                                    message: 'Vui lòng nhập dưới 100 ký tự',
+                                    max: 100,
                                 },
                             ]}
                         >
@@ -344,7 +352,11 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Người đại diện',
-                                },
+                                },{
+
+                                    message: 'Vui lòng nhập dưới 50 ký tự',
+                                    max: 50,
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
@@ -361,9 +373,10 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={ValidationRole} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Select>
+                                <Select.Option value={2}>giám đốc</Select.Option>
+                                <Select.Option value={3}>nhân viên</Select.Option>
+                            </Select>
                         </Form.Item>
 
 

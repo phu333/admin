@@ -276,14 +276,17 @@ class AddEmployee extends React.Component {
 
                     >
                         <Form.Item
-                            label=" Tên"
+                            label="Tên"
                             name="firstName"
                             rules={[
 
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
-                                },
+                                },                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
@@ -298,7 +301,10 @@ class AddEmployee extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập họ ',
-                                },
+                                },{
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
@@ -326,7 +332,10 @@ class AddEmployee extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tên người dùng',
-                                },
+                                },                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
