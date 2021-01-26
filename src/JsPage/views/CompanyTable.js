@@ -29,6 +29,37 @@ class CustomerList extends React.Component {
 
 
   }
+  handleChangeS(index, info) {
+    if (info == "0") { info = 1 }
+    else { info = 0 }
+    let Status = {
+        enabled: info
+    }
+    axios({
+        url: '/api/v1/Customer/'+index+'/change-status',
+        data: Status,
+        method: "PUT",
+        headers: {
+            Authorization: 'Bearer ' + this.props.token,
+
+        }
+
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+            console.log(data.data)
+            message.success("Trạng thái đã được cập nhật")
+
+        })
+        .catch(error => {
+            message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+        });
+
+}
   componentDidMount() {
 
     axios({
@@ -99,8 +130,8 @@ class CustomerList extends React.Component {
         {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>:null}
           <CustomerSearch token={this.props.token} customerList={this.state.customers} />
           <Table dataSource={this.props.newCustomer}
-
-            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+           rowClassName={(record, index) => record.status !== 0 ? 'table-row-light' : 'table-row-dark'}
+          >
             <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
               sorter={(a, b) => a.name.localeCompare(b.name)}
               sortDirections={['descend', 'ascend']}
@@ -177,7 +208,7 @@ class CustomerList extends React.Component {
               // sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "0" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                 </Space>
               )}
             />

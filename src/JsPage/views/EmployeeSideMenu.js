@@ -108,7 +108,7 @@ class EmployeeSideMenu extends React.Component {
                       {login.GetAllCompanyList === true ?
                         <Menu.Item key="Company">danh sách công ty</Menu.Item>
                         : null}
-                      {login.GetAllCompanyAccount === true ?
+                      {login.GetCompanyAdminList === true ?
                         <Menu.Item key="Account">danh sách tài khoản</Menu.Item>
                         : null} </> :
                       <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}

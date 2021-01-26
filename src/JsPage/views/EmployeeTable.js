@@ -205,7 +205,7 @@ class EmployeeList extends React.Component {
                   </Space>
                 )}
               />
-              {login.ActiveDeactiveAccount === true ?
+              {/* {login.ActiveDeactiveAccount === true ?
                 <Column
                   title="Trạng thái"
                   dataIndex="status"
@@ -216,7 +216,8 @@ class EmployeeList extends React.Component {
                       {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                     </Space>
                   )}
-                /> : null}</Table></div></FadeIn>
+                /> : null} */}
+                </Table></div></FadeIn>
         );
       }
 
