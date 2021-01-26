@@ -132,9 +132,9 @@ class AddUserAdmin extends React.Component {
         if (this.state.finish) {
             return (<FadeIn>
                 <Router>
-                    <Redirect push to={"/capstone/Login"} />
+                    <Redirect push to={"/admin/Login"} />
 
-                    <Route exact path="/capstone/Login" component={LoginPage} />
+                    <Route exact path="/admin/Login" component={LoginPage} />
                 </Router></FadeIn>
             );
         } else {

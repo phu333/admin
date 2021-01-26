@@ -171,8 +171,8 @@ class ViewCustomer extends React.Component {
         })
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/customerList"} />
-                <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
+                <Redirect push to={"/admin/customerList"} />
+                <Route exact path="/admin/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
                 } />
             </Router>);
         }

@@ -20,9 +20,10 @@ class CustomerList extends React.Component {
     super();
 
     this.state = {
+      loading: true,
       openCustomer: "",
       customer: {},
-      customers:[],
+      customers: [],
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
@@ -60,40 +61,47 @@ class CustomerList extends React.Component {
         });
 
 }
-  componentDidMount() {
+componentDidMount() {
 
-    axios({
-      url: '/api/v1/Customer',
-      method: "GET",
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
+  axios({
+    url: '/api/v1/Customer',
+    method: "GET",
+    headers: {
+      Authorization: 'Bearer ' + this.props.token,
 
-      }
+    }
+  })
+    .then((response) => {
+
+      return response.data;
     })
-      .then((response) => {
-
-        return response.data;
+    .then((data) => {
+      console.log(data.data)
+      this.setState({
+        customers: data.data,
       })
-      .then((data) => {
-        console.log(data.data)
+      setTimeout(function () {
         this.setState({
-          customers:data.data,
+          loading: false,
+
         })
         this.props.onSubmit(data.data)
 
+      }.bind(this), 5000)
 
-      })
-      .catch(error => {
-       
-      });
-      
-     
-     
-      
 
-    
+    })
+    .catch(error => {
 
-  }
+    });
+
+
+
+
+
+
+
+}
   OpenAddCustomer() {
     this.setState({
       openCustomer: "openAddCustomer",
@@ -130,6 +138,8 @@ class CustomerList extends React.Component {
         {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>:null}
           <CustomerSearch token={this.props.token} customerList={this.state.customers} />
           <Table dataSource={this.props.newCustomer}
+                          loading={this.state.loading}
+
            rowClassName={(record, index) => record.status !== 0 ? 'table-row-light' : 'table-row-dark'}
           >
             <Column title="Tên doanh nghiệp" dataIndex="name" key="name"

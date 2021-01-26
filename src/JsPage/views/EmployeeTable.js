@@ -21,7 +21,7 @@ class EmployeeList extends React.Component {
     super();
 
     this.state = {
-
+      loading:true,
       employee: {},
       openEmployee: "",
       employees: [],
@@ -48,7 +48,15 @@ class EmployeeList extends React.Component {
         this.setState({
           employees: data.data
         })
-        this.props.onSubmit(data.data)
+        setTimeout(function(){
+          this.setState({
+              loading:false,
+              
+          })
+          this.props.onSubmit(data.data)
+
+      }.bind(this),5000)
+        
 
       })
       .catch(error => {
@@ -65,6 +73,37 @@ class EmployeeList extends React.Component {
 
 
   }
+  handleChangeS(index, info) {
+    if (info == "0") { info = 1 }
+    else { info = 0 }
+    let Status = {
+        enabled: info
+    }
+    axios({
+        url: '/api/v1/Company/'+index+'/change-status',
+        data: Status,
+        method: "PUT",
+        headers: {
+            Authorization: 'Bearer ' + this.props.token,
+
+        }
+
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+            console.log(data.data)
+            message.success("Trạng thái đã được cập nhật")
+
+        })
+        .catch(error => {
+            message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+        });
+
+}
   OpenAddEmployee() {
     this.setState({
       openEmployee: "openAddEmployee",
@@ -80,7 +119,7 @@ class EmployeeList extends React.Component {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/admin/addEmployee"} />
-          <Route exact path="/admin/addEmployee" render={() => <AddEmployee token={this.props.token} employee={this.state.employee} />} /></Router>
+          <Route exact path="/admin/addEmployee" render={() => <AddEmployee token={this.props.token}  />} /></Router>
           </FadeIn>);
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (<FadeIn>
@@ -106,11 +145,11 @@ class EmployeeList extends React.Component {
 
         return (<FadeIn>
           <div style={{ height: "100vh" }}>
-            {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo tài khoản mới</Button> : null}
+            {login.CreateAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
-              // rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} 
-              >
+            loading={this.state.loading}
+              rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
         
               <Column title="Họ" dataIndex="lastName" key="lastName"
                 sorter={(a, b) => a.userName.localeCompare(b.lastName)}
@@ -191,7 +230,7 @@ class EmployeeList extends React.Component {
                     </Space>
                   )}
                 /> */}
-              <Column
+                {login.UpdateAccountPermission ?  <Column
                 title="Quyền hạn"
                 key="action"
                 align="center"
@@ -205,7 +244,8 @@ class EmployeeList extends React.Component {
                     } />
                   </Space>
                 )}
-              />
+              />: null}
+             
               {/* {login.ActiveDeactiveAccount === true ?
                 <Column
                   title="Trạng thái"
@@ -214,7 +254,7 @@ class EmployeeList extends React.Component {
                   key="status"
                   render={(text, record) => (
                     <Space size="middle">
-                      {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "0" ? <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                     </Space>
                   )}
                 /> : null} */}
