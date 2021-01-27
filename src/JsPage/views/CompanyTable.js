@@ -64,7 +64,7 @@ class CustomerList extends React.Component {
 }
 componentDidMount() {
 
-  axios({
+  axios({///api/v1/Company
     url: '/api/v1/Customer',
     method: "GET",
     headers: {
