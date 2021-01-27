@@ -295,7 +295,7 @@ hideRequiredMark
                 }, {
 
                     message: 'Vui lòng nhập dưới 100 ký tự',
-                    max: 100,
+                    max: 250,
                 },
             ]}
         >
@@ -351,7 +351,7 @@ hideRequiredMark
 
                 }, {
 
-                    message: 'Vui lòng nhập 8 ký tự',
+                    message: 'Vui lòng nhập 8 ký tự cuối',
                     min: 8,
                     max: 8,
                 },

@@ -9,7 +9,6 @@ import '../../index.css';
 
 
 
-
 const layout = {
     labelCol: {
         span: 7,
@@ -156,28 +155,28 @@ class UpdateProfileCompany extends React.Component {
     }
     render() {
         console.log(this.state.company.name)
-        
-        if(this.state.company.name === undefined){
-            return(<></>);
-        }else{
+
+        if (this.state.company.name === undefined) {
+            return (<></>);
+        } else {
             return (
 
 
                 <React.Fragment>
                     <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                     <Space direction="horizontal" align="start"  >
-    
-    
+
+
                         <Card style={{ width: 1000, minHeight: 600 }}>
-    
-                        <Form
+
+                            <Form
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
 hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
-                               
+
                             >
 
                                 <Form.Item
@@ -236,7 +235,7 @@ hideRequiredMark
                                         }, {
 
                                             message: 'Vui lòng nhập dưới 100 ký tự',
-                                            max: 100,
+                                            max: 250,
                                         },
                                     ]}
                                 >
@@ -248,7 +247,29 @@ hideRequiredMark
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
+                                <Form.Item
+                                    label="Điện thoại"
+                                    name="phoneNumber"
+                                    rules={[
 
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập 10 ký tự',
+                                            min: 6,
+                                            max: 10,
+                                        },
+                                    ]}
+                                >
+                                    {this.state.isEdit === false ?
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
+                                </Form.Item>
+                                <Row gutter={2}>
+                                    <Col span={12} >
                                         <Form.Item
                                             label="Email"
                                             name="email"
@@ -271,27 +292,7 @@ hideRequiredMark
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
                                         </Form.Item>
-                                        <Form.Item
-                                    label="Điện thoại"
-                                    name="phoneNumber"
-                                    rules={[
-
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập 10 ký tự',
-                                            min: 6,
-                                            max: 10,
-                                        },
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
+                                        </Col><Col span={12}>
                                         <Form.Item
                                             label="Giấy phép kinh doanh"
                                             name="businessLicense"
@@ -313,7 +314,7 @@ hideRequiredMark
                                                 <Row gutter={8}> <Col span={20}><Input type="number" defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
-                                        </Form.Item>
+                                        </Form.Item></Col></Row>
                                         <Form.Item
                                             label="Tài khoản ngân hàng"
                                             name="bankAccount"
@@ -406,12 +407,12 @@ hideRequiredMark
 
                         </Card></Space>
                 </React.Fragment>
-    
-    
+
+
             );
         }
 
-        
+
     }
 }
 
