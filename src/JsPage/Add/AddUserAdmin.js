@@ -344,7 +344,7 @@ class AddUserAdmin extends React.Component {
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                         </Popover></Row>
                                     </Form.Item></Col></Row>
-                            <h2 style={{ textAlign: 'center', color: 'white' }}>Tạo thông tin công ty</h2>
+                            <h2 style={{ textAlign: 'center', color: 'blue' }}>Tạo thông tin công ty</h2>
 
                             <Form.Item
                                 label={<label style={{ color: "#0099ff" }}>Tên doanh nghiệp</label>}
