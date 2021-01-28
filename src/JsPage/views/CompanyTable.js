@@ -38,7 +38,7 @@ class CustomerList extends React.Component {
     }
     axios({
       //      url: '/api/v1/Customer/'+index+'/change-status',ko chay duoc
-        url: '/api/v1/Customer/'+index+'/change-status',
+        url: '/api/v1/Company/'+index+'/change-status',
         data: Status,
         method: "PUT",
         headers: {
@@ -65,7 +65,7 @@ class CustomerList extends React.Component {
 componentDidMount() {
 
   axios({///api/v1/Company
-    url: '/api/v1/Customer',
+    url: '/api/v1/Company',
     method: "GET",
     headers: {
       Authorization: 'Bearer ' + this.props.token,
@@ -136,7 +136,6 @@ componentDidMount() {
   
      return (<FadeIn>
         <div style={{ height: "100vh" }}>
-        {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>:null}
           <CustomerSearch token={this.props.token} customerList={this.state.customers} />
           <Table dataSource={this.props.newCustomer}
                           loading={this.state.loading}
@@ -219,7 +218,7 @@ componentDidMount() {
               // sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
-                          {text === "0" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "1" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                 </Space>
               )}
             />

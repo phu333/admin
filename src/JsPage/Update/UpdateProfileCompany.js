@@ -173,102 +173,102 @@ class UpdateProfileCompany extends React.Component {
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
-hideRequiredMark
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
 
                             >
-
-                                <Form.Item
-                                    label="Tên doanh nghiệp"
-                                    name="name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên doanh nghiệp',
-                                        }, {
-
-                                            message: 'Vui lòng nhập dưới 250 ký tự',
-                                            max: 250,
-                                        }
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
-
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
-                                <Form.Item
-                                    label="Mã số thuế"
-                                    name="taxCode"
-                                    rules={[
-
-                                        {
-
-                                            message: 'Vui lòng nhập 10 ký tự',
-                                            min: 10,
-                                            max: 10,
-                                        },
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.taxCode} /></Col>    <Popover content={ValidationTax} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.taxCode} /></Col>    <Popover content={ValidationTax} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="Địa chỉ"
-                                    name="address"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập địa chỉ',
-
-                                        }, {
-
-                                            message: 'Vui lòng nhập dưới 100 ký tự',
-                                            max: 250,
-                                        },
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.address} /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.address} /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
-                                <Form.Item
-                                    label="Điện thoại"
-                                    name="phoneNumber"
-                                    rules={[
-
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập 10 ký tự',
-                                            min: 6,
-                                            max: 10,
-                                        },
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
                                 <Row gutter={2}>
+                                    <Col span={12}>
+
+                                        <Form.Item
+                                            label="Tên doanh nghiệp"
+                                            name="name"
+
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Vui lòng nhập tên doanh nghiệp',
+                                                }, {
+
+                                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                                    max: 250,
+                                                }
+                                            ]}
+                                        >
+                                            {this.state.isEdit === false ?
+
+                                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row> :
+                                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row>}
+                                        </Form.Item></Col><Col span={12}>
+                                        <Form.Item
+                                            label="Mã số thuế"
+                                            name="taxCode"
+                                            rules={[
+
+                                                {
+
+                                                    message: 'Vui lòng nhập 10 ký tự',
+                                                    min: 10,
+                                                    max: 10,
+                                                },
+                                            ]}
+                                        >
+                                            <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.taxCode} /></Col>    <Popover content={ValidationTax} trigger="hover">
+                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Row>
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={12}>
+
+                                        <Form.Item
+                                            label="Địa chỉ"
+                                            name="address"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Vui lòng nhập địa chỉ',
+
+                                                }, {
+
+                                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                                    max: 250,
+                                                },
+                                            ]}
+                                        >
+                                            {this.state.isEdit === false ?
+                                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.address} /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row> :
+                                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.address} /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row>}
+                                        </Form.Item></Col><Col span={12}>
+                                        <Form.Item
+                                            label="Điện thoại"
+                                            name="phoneNumber"
+                                            rules={[
+
+                                                {
+                                                    required: true,
+                                                    message: 'Vui lòng nhập 10 ký tự',
+                                                    min: 6,
+                                                    max: 10,
+                                                },
+                                            ]}
+                                        >
+                                            {this.state.isEdit === false ?
+                                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row> :
+                                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row>}
+                                        </Form.Item></Col>
                                     <Col span={12} >
                                         <Form.Item
                                             label="Email"
@@ -292,7 +292,7 @@ hideRequiredMark
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
                                         </Form.Item>
-                                        </Col><Col span={12}>
+                                    </Col><Col span={12}>
                                         <Form.Item
                                             label="Giấy phép kinh doanh"
                                             name="businessLicense"
@@ -314,7 +314,7 @@ hideRequiredMark
                                                 <Row gutter={8}> <Col span={20}><Input type="number" defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
-                                        </Form.Item></Col></Row>
+                                        </Form.Item></Col><Col span={12}>
                                         <Form.Item
                                             label="Tài khoản ngân hàng"
                                             name="bankAccount"
@@ -325,7 +325,7 @@ hideRequiredMark
 
                                                 }, {
 
-                                                    message: 'Vui lòng nhập 8 ký tự',
+                                                    message: 'Vui lòng nhập 8 ký tự cuối thẻ',
                                                     min: 8,
                                                     max: 8,
                                                 },
@@ -338,7 +338,7 @@ hideRequiredMark
                                                 <Row gutter={8}> <Col span={20}><Input type="number" defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={ValidationBank} trigger="hover">
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
-                                        </Form.Item>
+                                        </Form.Item></Col><Col span={12}>
                                         <Form.Item
                                             label="Người đại diện"
                                             name="representaive"
@@ -361,10 +361,10 @@ hideRequiredMark
                                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                                 </Popover></Row>}
                                         </Form.Item>
+                                    </Col>
+                                </Row>
 
-
-
-                                        {/* <Form.Item
+                                {/* <Form.Item
                                     label="Chức vụ"
                                     name="role"
     
@@ -381,29 +381,30 @@ hideRequiredMark
 
 
 
-                                        <Form.Item {...tailLayout}>
-                                            <Space size="large">
-                                                {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                                    Nộp
+                                <Form.Item {...tailLayout}>
+                                    <Space size="large">
+                                        {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                            Nộp
                                 </Button> : null}
-                                                {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                                    Xóa dữ liệu đã nhập                                </Button> : null}
+                                        {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                            Xóa dữ liệu đã nhập                                </Button> : null}
 
-                                                {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
-                                                    Sửa
+                                        {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                            Sửa
                                 </Button> : null}
 
 
-                                            </Space>
-                                        </Form.Item>
-                                        <Form.Item>
+                                    </Space>
+                                </Form.Item>
+                                <Form.Item>
 
-                                        </Form.Item>
+                                </Form.Item>
 
 
 
 
                             </Form>
+
 
                         </Card></Space>
                 </React.Fragment>
