@@ -160,7 +160,7 @@ class AddUserAdmin extends React.Component {
                         <Row gutter={2}>
                             <Col span={12} >
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Họ </label>}
+                                    label={ "Họ "}
                                     name="lastName"
                                     rules={[
                                         {
@@ -171,14 +171,14 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
 
 
                                 </Form.Item>
                             </Col><Col span={12}>
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Tên</label>}
+                                    label={ "Tên "}
                                     name="firstName"
                                     rules={[
                                         {
@@ -189,14 +189,14 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>                    </Form.Item>
 
                             </Col></Row>
                         <Row gutter={2}>
                             <Col span={12} >
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Chứng minh nhân dân</label>}
+                                    label={ "Chứng minh nhân dân "}
                                     name="userId"
                                     rules={[
 
@@ -209,14 +209,14 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input type="number" placeholder="Chứng minh nhân dân" /> </Col>    <Popover content={ValidationCmt} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
 
                                 </Form.Item>
 
                             </Col><Col span={12}>
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Chức vụ</label>}
+                                    label={ "Chức vụ "}
                                     name="userRole"
                                     rules={[
                                         {
@@ -235,7 +235,7 @@ class AddUserAdmin extends React.Component {
                         <Row gutter={2}>
                             <Col span={12} >
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Mật khẩu</label>}
+                                    label={ "Mật khẩu "}
                                     name="password"
                                     hasFeedback
                                     rules={[
@@ -255,12 +255,12 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
                                 </Form.Item>
                             </Col><Col span={12}>
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Xác nhận mật khẩu</label>}
+                                    label={ "Xác nhận mật khẩu "}
                                     name="confirmPassword"
                                     dependencies={['password']}
                                     hasFeedback
@@ -281,7 +281,7 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
 
                                 </Form.Item>
@@ -289,7 +289,7 @@ class AddUserAdmin extends React.Component {
                         <Row gutter={2}>
                             <Col span={12} >
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Email</label>}
+                                    label={ "Email "}
                                     name="email"
                                     rules={[
                                         {
@@ -303,13 +303,13 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input placeholder="Email" /></Col>    <Popover content={ValidationEmail} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
 
                                 </Form.Item>
                             </Col><Col span={12}>
                                 <Form.Item
-                                    label={<label style={{ color: "blue" }}>Điện thoại</label>}
+                                    label={ "Điện thoại "}
                                     name="phoneNumber"
                                     rules={[
                                         {
@@ -321,7 +321,7 @@ class AddUserAdmin extends React.Component {
                                     ]}
                                 >
                                     <Row gutter={8}> <Col span={22}><Input type="number" prefix="+84" placeholder="Điện thoại" /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                     </Popover></Row>
                                 </Form.Item></Col></Row>
                     </div>
@@ -331,7 +331,7 @@ class AddUserAdmin extends React.Component {
 
                         <br />
                         <Form.Item
-                            label={<label style={{ color: "blue" }}>Tên doanh nghiệp</label>}
+                            label={ "Tên doanh nghiệp "}
                             name="companyName"
                             rules={[
                                 {
@@ -346,11 +346,11 @@ class AddUserAdmin extends React.Component {
                         >
                             <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>
                                 <Popover content={ValidationCompany} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                                 </Popover></Row>
                         </Form.Item>
                         <Form.Item
-                            label={<label style={{ color: "blue" }}>Mã số thuế</label>}
+                            label={ "Mã số thuế "}
                             name="taxCode"
                             rules={[
                                 {
@@ -362,20 +362,20 @@ class AddUserAdmin extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                             </Popover></Row>
                         </Form.Item>
                         <Form.Item
-                            label={<label style={{ color: "blue" }}>Giấy phép kinh doanh</label>}
+                            label={ "Giấy phép kinh doanh "}
                             name="businessLicense"
                             required
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                             </Popover></Row>
                         </Form.Item>
                         <Form.Item
-                            label={<label style={{ color: "blue" }}>Tài khoản ngân hàng</label>}
+                            label={ "Tài khoản ngân hàng "}
                             name="bankAccount"
                             rules={[
                                 {
@@ -386,12 +386,12 @@ class AddUserAdmin extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                             </Popover></Row>
                         </Form.Item>
 
                         <Form.Item
-                            label={<label style={{ color: "blue" }}>Địa chỉ</label>}
+                            label={ "Địa chỉ "}
                             name="address"
                             rules={[
                                 {
@@ -401,7 +401,7 @@ class AddUserAdmin extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'blue', verticalAlign: 'center' }} />} />
+                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                             </Popover></Row>
                         </Form.Item>
                     </div>
