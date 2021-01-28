@@ -274,8 +274,7 @@ class AddUserAdmin extends React.Component {
                                                 message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
                                             }, {
                                                 min: 6,
-                                                max:10,
-                                                message: "xin vui lòng nhập ít nhất 6 và nhiều nhất ký tự"
+                                                message: "xin vui lòng nhập ít nhất 6 ký tự"
                                             }
                                         ]}
 
