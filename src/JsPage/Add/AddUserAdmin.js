@@ -1,7 +1,7 @@
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
-import { Button, Card, Col, Form, Input, message, Popover, Row, Space,Select } from 'antd';
+import { Button, Card, Col, Form, Input, message, Popover, Row, Space, Select } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import React from 'react';
@@ -79,7 +79,7 @@ const ValidationLPresentor = (
 
 ); const ValidationPass = (
 
-    <p>Vui lòng nhập password với 6 ký tự</p>
+    <p>Vui lòng nhập password với it nhất 6 ký tự có chữ hoa chữ thường số và ký tự đặc biệt</p>
 
 ); const ValidationBank = (
 
@@ -123,6 +123,7 @@ class AddUserAdmin extends React.Component {
 
 
     };
+
     Cancel = () => {
         this.setState({
             finish: true
@@ -141,9 +142,9 @@ class AddUserAdmin extends React.Component {
             return (
                 <Card style={{ backgroundColor: 'rgb(8, 59, 102)' }}>
                     <br />
-                    <div style={{backgroundColor:'whitesmoke'}}>
-                                            <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
+                    <div style={{ backgroundColor: 'whitesmoke' }}>
+                        <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                            Trở về
               </Button>
                         <h2 style={{ textAlign: 'center', color: '#0099ff' }}>Tạo thông tin Admin</h2>
 
@@ -152,13 +153,13 @@ class AddUserAdmin extends React.Component {
                             name="basic"
                             className="employee-form"
                             hideRequiredMark
-                            
+
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
                         >
                             <Row gutter={2}>
                                 <Col span={12} >
-                                <Form.Item
+                                    <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Tên </label>}
                                         name="firstname"
                                         rules={[
@@ -268,13 +269,16 @@ class AddUserAdmin extends React.Component {
                                                 required: true,
                                                 message: 'Vui lòng nhập Mật khẩu',
 
-                                            },
-                                            {
-
-                                                message: 'Vui lòng nhập 6 kí tự',
+                                            }, {
+                                                pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+                                                message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
+                                            }, {
                                                 min: 6,
-                                            },
+                                                max:10,
+                                                message: "xin vui lòng nhập ít nhất 6 và nhiều nhất ký tự"
+                                            }
                                         ]}
+
                                     >
                                         <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />

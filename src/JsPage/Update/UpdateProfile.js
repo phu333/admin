@@ -247,9 +247,11 @@ class UpdateProfile extends React.Component {
                                             required: true,
                                             message: 'Vui lòng không để trống ',
                                         }, {
-                                            max: 6,
                                             min: 6,
-                                            message: 'Vui lòng không nhập 6 ký tự'
+                                            message: 'Vui lòng không nhập dưới 6 ký tự'
+                                        }, {
+                                            pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+                                            message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
                                         }
                                     ]}
                                 >
