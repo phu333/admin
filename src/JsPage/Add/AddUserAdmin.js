@@ -146,280 +146,272 @@ class AddUserAdmin extends React.Component {
                     Trở về
           </Button>
                 <h2 style={{ textAlign: 'center', color: 'white' }}>Tạo thông tin Admin</h2>
+                
                 <Form
-                    {...layout}
-                    name="basic"
-                    className="employee-form"
-                    hideRequiredMark
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
+                        hideRequiredMark
 
-                    onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
-                >
-                    <div style={{ backgroundColor: 'white' }}>
-                        <br />
-                        <Row gutter={2}>
-                            <Col span={12} >
-                                <Form.Item
-                                    label={ "Họ "}
-                                    name="lastName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập họ',
-                                        },
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
+                    >
+                        <div style={{ backgroundColor: 'white' }}>
+                            <br />
+                            <Row gutter={2}>
+                                <Col span={12} >
+                                    <Form.Item
+                                        label="Họ "
+                                        name="lastName"
 
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Họ" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
 
 
-                                </Form.Item>
-                            </Col><Col span={12}>
-                                <Form.Item
-                                    label={ "Tên "}
-                                    name="firstName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên ',
-                                        },
+                                    </Form.Item>
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label="Tên "
+                                        name="firstName"
 
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>                    </Form.Item>
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
 
-                            </Col></Row>
-                        <Row gutter={2}>
-                            <Col span={12} >
-                                <Form.Item
-                                    label={ "Chứng minh nhân dân "}
-                                    name="userId"
-                                    rules={[
 
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Chứng minh nhân dân ',
-                                            min: 10,
-                                            max: 10,
-                                        },
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input type="number" placeholder="Chứng minh nhân dân" /> </Col>    <Popover content={ValidationCmt} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
+                                    </Form.Item>
 
-                                </Form.Item>
+                                </Col></Row>
+                            <Row gutter={2}>
+                                <Col span={12} >
+                                    <Form.Item
+                                        label={"Chứng minh nhân dân "}
+                                        name="userId"
+                                        rules={[
 
-                            </Col><Col span={12}>
-                                <Form.Item
-                                    label={ "Chức vụ "}
-                                    name="userRole"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Chức vụ',
-                                        },
-                                    ]}
-                                >
-                                    <Select>
-                                        <Select.Option value={2}>giám đốc</Select.Option>
-                                        <Select.Option value={3}>nhân viên</Select.Option>
-                                    </Select>
-                                </Form.Item>
-                            </Col></Row>
-
-                        <Row gutter={2}>
-                            <Col span={12} >
-                                <Form.Item
-                                    label={ "Mật khẩu "}
-                                    name="password"
-                                    hasFeedback
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Mật khẩu',
-
-                                        },
-                                        {
-
-                                            message: 'Vui lòng nhập dưới 6 kí tự',
-                                            min: 6,
-                                        }, {
-                                            pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
-                                            message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
-                                        }
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
-                                </Form.Item>
-                            </Col><Col span={12}>
-                                <Form.Item
-                                    label={ "Xác nhận mật khẩu "}
-                                    name="confirmPassword"
-                                    dependencies={['password']}
-                                    hasFeedback
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Mật khẩu',
-                                        },
-                                        ({ getFieldValue }) => ({
-                                            validator(rule, value) {
-                                                if (!value || getFieldValue('password') === value) {
-                                                    return Promise.resolve();
-                                                }
-
-                                                return Promise.reject('Vui lòng nhập lại Mật khẩu');
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Chứng minh nhân dân ',
+                                                min: 10,
+                                                max: 10,
                                             },
-                                        }),
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input type="number" placeholder="Chứng minh nhân dân" /> </Col>    <Popover content={ValidationCmt} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
 
-                                </Form.Item>
-                            </Col></Row>
-                        <Row gutter={2}>
-                            <Col span={12} >
-                                <Form.Item
-                                    label={ "Email "}
-                                    name="email"
-                                    rules={[
-                                        {
-                                            type: 'email',
-                                            message: 'The input is not valid E-mail!',
-                                        },
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Email',
-                                        },
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input placeholder="Email" /></Col>    <Popover content={ValidationEmail} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
+                                    </Form.Item>
 
-                                </Form.Item>
-                            </Col><Col span={12}>
-                                <Form.Item
-                                    label={ "Điện thoại "}
-                                    name="phoneNumber"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập sdt',
-                                            min: 10,
-                                            max: 10,
-                                        },
-                                    ]}
-                                >
-                                    <Row gutter={8}> <Col span={22}><Input type="number" prefix="+84" placeholder="Điện thoại" /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                    </Popover></Row>
-                                </Form.Item></Col></Row>
-                    </div>
-                    <br />
-                    <h2 style={{ textAlign: 'center', color: 'white' }}>Tạo thông tin công ty</h2>
-                    <div style={{ backgroundColor: 'white' }} >
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label={"username "}
+                                        name="username"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng tên user',
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="text" />
+                                    </Form.Item>
+                                </Col></Row>
 
+                            <Row gutter={2}>
+                                <Col span={12} >
+                                    <Form.Item
+                                        label={"Mật khẩu "}
+                                        name="password"
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Mật khẩu',
+
+                                            },
+                                            {
+
+                                                message: 'Vui lòng nhập dưới 6 kí tự',
+                                                min: 6,
+                                            }, {
+                                                pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+                                                message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
+                                            }
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Xác nhận mật khẩu "}
+                                        name="confirmPassword"
+                                        dependencies={['password']}
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Mật khẩu',
+                                            },
+                                            ({ getFieldValue }) => ({
+                                                validator(rule, value) {
+                                                    if (!value || getFieldValue('password') === value) {
+                                                        return Promise.resolve();
+                                                    }
+
+                                                    return Promise.reject('Vui lòng nhập lại Mật khẩu');
+                                                },
+                                            }),
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+
+                                    </Form.Item>
+                                </Col></Row>
+                            <Row gutter={2}>
+                                <Col span={12} >
+                                    <Form.Item
+                                        label={"Email "}
+                                        name="email"
+                                        rules={[
+                                            {
+                                                type: 'email',
+                                                message: 'The input is not valid E-mail!',
+                                            },
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Email',
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Email" /></Col>    <Popover content={ValidationEmail} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+
+                                    </Form.Item>
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Điện thoại "}
+                                        name="phoneNumber"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập sdt',
+                                                min: 10,
+                                                max: 10,
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input type="number" prefix="+84" placeholder="Điện thoại" /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item></Col></Row>
+                        </div>
                         <br />
-                        <Form.Item
-                            label={ "Tên doanh nghiệp "}
-                            name="companyName"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập tên ',
-                                },
-                                {
-                                    max: 50,
-                                    message: 'Vui lòng không nhập quá 50 ký tự'
-                                }
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>
-                                <Popover content={ValidationCompany} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                                </Popover></Row>
-                        </Form.Item>
-                        <Form.Item
-                            label={ "Mã số thuế "}
-                            name="taxCode"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập mst ',
+                        <h2 style={{ textAlign: 'center', color: 'white' }}>Tạo thông tin công ty</h2>
+                        <div style={{ backgroundColor: 'white' }} >
 
-                                },
+                            <br />
 
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                            </Popover></Row>
-                        </Form.Item>
-                        <Form.Item
-                            label={ "Giấy phép kinh doanh "}
-                            name="businessLicense"
-                            required
-                        >
-                            <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                            </Popover></Row>
-                        </Form.Item>
-                        <Form.Item
-                            label={ "Tài khoản ngân hàng "}
-                            name="bankAccount"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Số tài khoản',
+                            <Form.Item
+                                label={"Tên doanh nghiệp "}
+                                name="companyName"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập tên ',
+                                    },
+                                    {
+                                        max: 50,
+                                        message: 'Vui lòng không nhập quá 50 ký tự'
+                                    }
+                                ]}
+                            >
+                                <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>
+                                    <Popover content={ValidationCompany} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                    </Popover></Row>
+                            </Form.Item>                            <Row gutter={2}>
+                                <Col span={12}>
+                                    <Form.Item
+                                        label={"Mã số thuế "}
+                                        name="taxCode"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập mst ',
 
-                                },
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                            </Popover></Row>
-                        </Form.Item>
+                                            },
 
-                        <Form.Item
-                            label={ "Địa chỉ "}
-                            name="address"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Địa chỉ',
-                                },
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                                <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
-                            </Popover></Row>
-                        </Form.Item>
-                    </div>
-                    <Form.Item {...tailLayout}>
-                        <Space size="large">
-                            <Button type="primary" htmlType="submit" >
-                                Tạo
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item></Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Giấy phép kinh doanh "}
+                                        name="businessLicense"
+                                        required
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item></Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Tài khoản ngân hàng "}
+                                        name="bankAccount"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Số tài khoản',
+
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Địa chỉ "}
+                                        name="address"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Địa chỉ',
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col></Row>
+                            <p></p>
+                        </div>
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                <Button type="primary" htmlType="submit" >
+                                    Tạo
                             </Button>
-                            <Button type="primary" htmlType="reset" >
-                                Xóa dữ liệu đã nhập                                </Button>
+                                <Button type="primary" htmlType="reset" >
+                                    Xóa dữ liệu đã nhập                                </Button>
 
 
-                        </Space>
-                    </Form.Item>
+                            </Space>
+                        </Form.Item>
 
 
-                </Form>
-
+                    </Form>
 
             </Card >
 

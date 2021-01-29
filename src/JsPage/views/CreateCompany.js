@@ -342,7 +342,6 @@ class CreateCompany extends React.Component {
                         <Form.Item
                             label="Người đại diện"
                             name="representative"
-                            style={{width:'1000px'}}
                             rules={[
                                 {
                                     required: true,
