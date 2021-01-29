@@ -140,7 +140,7 @@ componentDidMount() {
           <Table dataSource={this.props.newCustomer}
                           loading={this.state.loading}
 
-           rowClassName={(record, index) => record.status !== 0 ? 'table-row-light' : 'table-row-dark'}
+          //  rowClassName={(record, index) => record.status !== 0 ? 'table-row-light' : 'table-row-dark'}
           >
             <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
               sorter={(a, b) => a.name.localeCompare(b.name)}
@@ -218,7 +218,7 @@ componentDidMount() {
               // sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
-                          {text === "1" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text == "1" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defauunltChecked />}
                 </Space>
               )}
             />

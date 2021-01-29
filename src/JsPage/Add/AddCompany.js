@@ -376,7 +376,7 @@ hideRequiredMark
                     message: 'Vui lòng nhập dưới 50 ký tự',
                     max: 50,
                 },]}                    >
-            <Row gutter={8}> <Col span={24}><Input type="number" /></Col>    <Popover content={ValidationPresentor} trigger="hover">
+            <Row gutter={8}> <Col span={24}><Input type="text" /></Col>    <Popover content={ValidationPresentor} trigger="hover">
                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
             </Popover></Row>
         </Form.Item></Col>
